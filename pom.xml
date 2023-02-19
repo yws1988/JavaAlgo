@@ -13,6 +13,7 @@
         <module>excercises</module>
         <module>search</module>
         <module>bitmasking</module>
+        <module>dynamicprogramming</module>
     </modules>
 
     <properties>

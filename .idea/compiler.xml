@@ -10,6 +10,7 @@
         <module name="search" />
         <module name="bitmasking" />
         <module name="datastructures" />
+        <module name="dynamicprogramming" />
       </profile>
     </annotationProcessing>
   </component>

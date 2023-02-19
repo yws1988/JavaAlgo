@@ -1,6 +1,7 @@
 unionFind\excercises\ConnectedComponentsSizeInGraph.class
 Main.class
 unionFind\UnionFind.class
-ternarySearch\TernarySearchForUnimodalFunction.class
 unionFind\UnionFind$Subset.class
 ternarySearch\TernarySearchForUnimodalFunctionWithInergerInterval.class
+ternarySearch\TernarySearchForUnimodalFunction.class
+collections\array\NumOfSubArraysEqualsToK.class
