@@ -1,4 +1,4 @@
-﻿// Longest increasing Sequence length
+// Longest increasing Sequence length
 // Input { 10, 2, 36, 7, 9, 25, 12, 2 }
 // Output 4 {2, 7, 9, 12 }
 

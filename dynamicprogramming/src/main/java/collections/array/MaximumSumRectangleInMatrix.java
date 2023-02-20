@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Given a 2D array, find the maximum sum subarray in it. 
  * For example, in the following 2D array, the maximum sum subarray is 
  * highlighted with blue rectangle and sum of this subarray is 29.

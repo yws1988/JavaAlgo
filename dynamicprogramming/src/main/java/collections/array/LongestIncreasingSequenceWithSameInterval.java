@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Given a set of numbers, find the Length of the Longest Arithmetic Progression(LLAP) in it(increasing array with the same interval)
  * set[] = {1, 7, 10, 15, 27, 29}
  * output = 3

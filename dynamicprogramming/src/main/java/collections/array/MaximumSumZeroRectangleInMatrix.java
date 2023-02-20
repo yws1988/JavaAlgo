@@ -1,8 +1,8 @@
-﻿/*
+/*
  *  Given a 2D array, find the maximum sum subarray in it. For example
- *  {{1, 2, -1, -4, -20},  
- *  {-8, -3, 4, 2, 1},  
- *  {3, 8, -8, 1, 3},  
+ *  {{1, 2, -1, -4, -20},
+ *  {-8, -3, 4, 2, 1},
+ *  {3, 8, -8, 1, 3},
  *  {-4, -1, 1, 7, -6}}
  *  Result:
  *  (Top, Left) (0, 1)
@@ -11,7 +11,10 @@
  */
 package collections.array;
 
-public class MaximumSumZeroRectangle
+import java.util.HashMap;
+import java.util.Map;
+
+public class MaximumSumZeroRectangleInMatrix
 {
     static int mL, mR, mT, mB;
     static int Max = -1;
@@ -29,7 +32,7 @@ public class MaximumSumZeroRectangle
             {
                 for (int i = 0; i < row; i++)
                 {
-                    temp[i] += arr[i, right];
+                    temp[i] += arr[i][right];
                 }
                 MaximumSubArraySumZero(temp, left, right);
             }
@@ -56,7 +59,7 @@ public class MaximumSumZeroRectangle
         int end = 0;
         int max = 0;
 
-        Dictionary<double, int> dic = new Dictionary<double, int>();
+        Map<Double, Integer> dic = new HashMap<>();
 
         for (int i = 0; i < temp.length; i++)
         {
@@ -76,19 +79,19 @@ public class MaximumSumZeroRectangle
             }
             else
             {
-                if (dic.ContainsKey(sum))
+                if (dic.containsKey(sum))
                 {
-                    int len = i - dic[sum];
+                    int len = i - dic.get(sum);
                     if (len > max)
                     {
                         max = len;
-                        start = dic[sum]+1;
+                        start = dic.get(sum)+1;
                         end = i;
                     }
                 }
                 else
                 {
-                    dic.Add(sum, i);
+                    dic.put(sum, i);
                 }
             }
         }

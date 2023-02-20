@@ -1,50 +1,50 @@
-﻿/*
+/*
  * Given an array arr[] of size n, find the maximum size of the subarray 
  * which of the sum is zero
  */
-namespace CSharpAlgo.DynamicProgramming.Collection.Array
+package collections.array;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+public class MaximumSumZeroSubArray
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
-    public class MaximumSumZeroSubArray
+    public static double[] getSubArray(double[] array)
     {
-        public static double[] GetSubArray(double[] array)
+        double sum = 0;
+        int start = -1;
+        int maxLength = 0;
+
+        Map<Double, Integer> dic = new HashMap<>();
+
+        for (int i = 0; i < array.length; i++)
         {
-            double sum = 0;
-            int start = -1;
-            int maxLength = 0;
+            sum += array[i];
 
-            Dictionary<double, int> dic = new Dictionary<double, int>();
-
-            for (int i = 0; i < array.length; i++)
+            if (sum == 0)
             {
-                sum += array[i];
-
-                if (sum == 0)
+                start = 0;
+                maxLength = i + 1;
+            }
+            else
+            {
+                if (dic.containsKey(sum))
                 {
-                    start = 0;
-                    maxLength = i + 1;
+                    int len = i - dic.get(sum);
+                    if (len > maxLength)
+                    {
+                        maxLength = len;
+                        start = dic.get(sum) + 1;
+                    }
                 }
                 else
                 {
-                    if (dic.ContainsKey(sum))
-                    {
-                        int len = i - dic[sum];
-                        if (len > maxLength)
-                        {
-                            maxLength = len;
-                            start = dic[sum] + 1;
-                        }
-                    }
-                    else
-                    {
-                        dic.Add(sum, i);
-                    }
+                    dic.put(sum, i);
                 }
             }
-
-            return start == -1 ? null : array.Skip(start).Take(maxLength).ToArray();
         }
+
+        return start == -1 ? null : Arrays.copyOfRange(array, start, start+maxLength);
     }
 }

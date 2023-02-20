@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Find the maximum sum of a sub array in array
  * For example {3,7,-11,5,4,-2,5}
  * The result is 10

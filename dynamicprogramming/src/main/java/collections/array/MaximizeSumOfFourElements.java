@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Maximize arr[j] – arr[i] + arr[l] – arr[k], such that i < j < k < l.
  * Find the maximum value of arr[j] – arr[i] + arr[l] – arr[k], such that i < j < k < l
  * Array {4, 8, 9, 2, 20}

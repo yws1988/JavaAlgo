@@ -1,7 +1,9 @@
-﻿// Longest decreasing and increasing Sequence length for every element
-// Input { 10, 2, 1, 7, 9, 25, 12, 2 }
-// Output
-// For element 6 is { 10, 2, 1, 7, 9, 12 }
+/*
+ Longest decreasing and increasing Sequence length for every element
+ Input { 10, 2, 1, 7, 9, 25, 12, 2 }
+ Output
+ For element 6 is { 10, 2, 1, 7, 9, 12 }
+*/
 
 package collections.array;
 
