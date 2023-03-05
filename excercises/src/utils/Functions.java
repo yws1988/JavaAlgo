@@ -25,4 +25,9 @@ public class Functions
             System.out.println(String.join(sep, Arrays.stream(g[i]).mapToObj(String::valueOf).toArray(String[]::new)));
         }
     }
+
+    static int getMinValue(int n1, int n2, int n3)
+    {
+        return n1 > n2 ? (n2 > n3 ? n3 : n2) : (n1 > n3 ? n3 : n1);
+    }
 }

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/datastructures/datastructures.iml" filepath="$PROJECT_DIR$/datastructures/datastructures.iml" />
       <module fileurl="file://$PROJECT_DIR$/excercises/excercises.iml" filepath="$PROJECT_DIR$/excercises/excercises.iml" />
     </modules>
   </component>
