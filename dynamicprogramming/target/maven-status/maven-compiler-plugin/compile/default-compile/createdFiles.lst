@@ -6,11 +6,12 @@ others\MinimumCostToReachAtLeastWeight.class
 graph\NumOfPathKEdgesInGraph.class
 collections\array\LongestAndMaximumSumBitonicSequence.class
 others\MinimumCostToReachWeight$Pair.class
+others\NumOfSolutionsInfiniteCoinChange.class
 graph\MaximumSumOfNonIntersectionElementsInMatrix.class
-others\MinOperationConvertionStrings.class
 collections\list\MaximumLengthChainPairs.class
 graph\MaximumSubSquareMatrix.class
 collections\array\AllSubsequencesOfTheMaximumNumberEqualToSequenceLength.class
 others\MaximumValueToReachAtMostWeight.class
 others\MinimumCostToReachWeight.class
+string\MinOperationConvertionStrings.class
 others\CountEvenLengthBinaryWithSameSum.class

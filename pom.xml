@@ -15,6 +15,7 @@
         <module>bitmasking</module>
         <module>dynamicprogramming</module>
         <module>geometry</module>
+        <module>graph</module>
     </modules>
 
     <properties>
