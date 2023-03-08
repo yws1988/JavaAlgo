@@ -1,29 +1,29 @@
-package utils;
+package isograd;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.io.File;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
-public class Template
+public class IsoContest
 {
     public static int n;
     public static int[] ns;
     public static String s;
     public static String[] ss;
+    public static int[][] gg;
 
     public static void solve()
     {
+       
     }
 
     public static Scanner scanner;
 
-    public static void mainf( String[] argv ) throws Exception
+    public static void main( String[] argv ) throws Exception
     {
         if(true){
-            scanner = new Scanner("test\test.txt");
+            File file = new File("C:\\Users\\shen\\Downloads\\input1.txt");
+            scanner = new Scanner(file);
         }else{
             scanner = new Scanner(System.in);
         }
@@ -33,6 +33,7 @@ public class Template
         s = readString();
         ss = readStringArray();
         ss = readLines(n);
+        gg = readIntMatrix(n);
 
         solve();
         scanner.close();

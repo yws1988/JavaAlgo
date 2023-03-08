@@ -1,21 +1,23 @@
-package utils;
+package isograd;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.io.File;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
-public class Template
+public class IsoContest2
 {
     public static int n;
     public static int[] ns;
     public static String s;
     public static String[] ss;
+    public static int[][] gg;
 
     public static void solve()
     {
+        String[] res = s.split(":");
+        var hh = Integer.parseInt(res[0]);
+        var ss = Integer.parseInt(res[1]);
+        System.out.println(hh>=0 && hh<=23 && ss>=0 && ss<=59 ? "YES":"NO");
     }
 
     public static Scanner scanner;
@@ -23,7 +25,8 @@ public class Template
     public static void mainf( String[] argv ) throws Exception
     {
         if(true){
-            scanner = new Scanner("test\test.txt");
+            File file = new File("C:\\Users\\shen\\Downloads\\input1.txt");
+            scanner = new Scanner(file);
         }else{
             scanner = new Scanner(System.in);
         }
@@ -33,6 +36,7 @@ public class Template
         s = readString();
         ss = readStringArray();
         ss = readLines(n);
+        gg = readIntMatrix(n);
 
         solve();
         scanner.close();
