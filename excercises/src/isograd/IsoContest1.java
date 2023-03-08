@@ -19,7 +19,7 @@ public class IsoContest1
 
     public static Scanner scanner;
 
-    public static void main( String[] argv ) throws Exception
+    public static void mainf( String[] argv ) throws Exception
     {
         if(true){
             File file = new File("C:\\Users\\shen\\Downloads\\input1.txt");

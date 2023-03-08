@@ -14,7 +14,7 @@ public class IsoContest
 
     public static void solve()
     {
-       
+
     }
 
     public static Scanner scanner;
