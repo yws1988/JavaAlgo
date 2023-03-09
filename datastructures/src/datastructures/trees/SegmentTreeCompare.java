@@ -3,11 +3,11 @@ package datastructures.trees;
 import java.util.function.BiFunction;
 
 public class SegmentTreeCompare {
-    private int[] array;
-    private int sizeOfArray;
-    private Node[] tree;
-    private int sizeOfTree;
-    private BiFunction<Node, Node, Node> func;
+    public int[] array;
+    public int sizeOfArray;
+    public Node[] tree;
+    public int sizeOfTree;
+    public BiFunction<Node, Node, Node> func;
 
     public SegmentTreeCompare(int[] array, BiFunction<Node, Node, Node> func) {
         this.array = array;

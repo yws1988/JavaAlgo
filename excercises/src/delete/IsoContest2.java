@@ -1,4 +1,4 @@
-package isograd;
+package delete;
 
 import java.io.File;
 import java.util.Arrays;

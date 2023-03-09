@@ -1,4 +1,4 @@
-package isograd;
+package delete;
 
 import java.io.File;
 import java.util.Arrays;
@@ -14,18 +14,64 @@ public class IsoContest
 
     public static void solve()
     {
+        ss = readLines(n);
+        gg = new int[n][n];
         for (int i = 0; i < n; i++) {
-            ss = readStringArray();
-            // gg = new int[n][n];
+            for (int j = 0; j < n; j++) {
+                gg[i][j] = ss[i].charAt(j)=='#' ? 1:0;
+            }
         }
+        getConnectedGraphNum(gg);
+
+        System.out.println(count);
+    }
+
+    public static int count=0;
+
+    public static void getConnectedGraphNum(int[][] graph)
+    {
+        int v = graph.length;
+        boolean[][] vs = new boolean[v][v];
 
 
-        System.out.println();
+        for (int i = 0; i < v; i++)
+        {
+            for (int j = 0; j < v; j++)
+            {
+                if(graph[i][j]==1 && !vs[i][j])
+                {
+                    count++;
+                    DFSUtil(graph, i, j, vs, v);
+                }
+            }
+        }
+    }
+
+    static int[] dx = {0, 1, 0, -1};
+    static int[] dy = {1, 0, -1, 0};
+
+    static void DFSUtil(int[][] graph, int i, int j, boolean[][] vs, int v)
+    {
+        vs[i][j] = true;
+
+        for (int k = 0; k < 4; k++) {
+            int tI = i + dx[k];
+            int tJ = j + dy[k];
+            if(isSafe(tI, tJ, v) && !vs[tI][tJ] && graph[tI][tJ]==1)
+            {
+                DFSUtil(graph, tI, tJ, vs, v);
+            }
+        }
+    }
+
+    static boolean isSafe(int i, int j, int v)
+    {
+        return i >= 0 && i < v && j >= 0 && j < v;
     }
 
     public static Scanner scanner;
 
-    public static void main( String[] argv ) throws Exception
+    public static void mainF( String[] argv ) throws Exception
     {
         if(true){
             File file = new File("C:\\Users\\shen\\Downloads\\input1.txt");
@@ -35,9 +81,6 @@ public class IsoContest
         }
 
         n = readInt();
-        ns = readIntArray();
-        n=ns[0];
-        m=ns[1];
 
 //        ns = readIntArray();
 //        s = readString();
@@ -49,8 +92,7 @@ public class IsoContest
         scanner.close();
     }
 
-//
-    public static int readInt() { int ddd =scanner.nextInt(); scanner.nextLine();  return ddd;}
+    public static int readInt() { int ddd =scanner.nextInt();  scanner.nextLine(); return ddd;}
     public static int[] readIntArray() { return Arrays.stream(readStringArray()).mapToInt(Integer::parseInt).toArray(); }
     public static String readString() { return scanner.nextLine(); }
     public static String[] readStringArray() { return scanner.nextLine().split("[ \t]"); }
@@ -66,5 +108,7 @@ public class IsoContest
             this.y = y;
         }
     }
+
+
 }
 
