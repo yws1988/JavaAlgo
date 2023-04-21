@@ -1,10 +1,10 @@
-package delete;
+package isograd;
 
 import java.io.File;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class IsoContest
+public class IsoContestPizza
 {
     public static int m,n;
     public static int[] ns;

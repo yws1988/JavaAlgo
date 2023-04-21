@@ -1,4 +1,4 @@
-package ternarySearch;
+package search.ternarySearch;
 
 /*
 You have been given an Unimodal function:

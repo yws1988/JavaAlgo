@@ -1,4 +1,4 @@
-package ternarySearch;
+package search.ternarySearch;
 
 /*
   return the maximum value of the function f(x) = -1*1*x*x + 2*x +3

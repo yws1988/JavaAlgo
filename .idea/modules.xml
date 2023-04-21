@@ -8,6 +8,8 @@
       <module fileurl="file://$PROJECT_DIR$/excercises/excercises.iml" filepath="$PROJECT_DIR$/excercises/excercises.iml" />
       <module fileurl="file://$PROJECT_DIR$/geometry.iml" filepath="$PROJECT_DIR$/geometry.iml" />
       <module fileurl="file://$PROJECT_DIR$/graph.iml" filepath="$PROJECT_DIR$/graph.iml" />
+      <module fileurl="file://$PROJECT_DIR$/search/search.iml" filepath="$PROJECT_DIR$/search/search.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sorting.iml" filepath="$PROJECT_DIR$/sorting.iml" />
     </modules>
   </component>
 </project>

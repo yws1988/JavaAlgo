@@ -16,6 +16,7 @@
         <module>dynamicprogramming</module>
         <module>geometry</module>
         <module>graph</module>
+        <module>sorting</module>
     </modules>
 
     <properties>

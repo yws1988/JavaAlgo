@@ -9,6 +9,7 @@
         <module name="search" />
         <module name="bitmasking" />
         <module name="dynamicprogramming" />
+        <module name="sorting" />
         <module name="excercises" />
         <module name="geometry" />
         <module name="datastructures" />

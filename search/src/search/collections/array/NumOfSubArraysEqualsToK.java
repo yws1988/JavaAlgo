@@ -6,7 +6,7 @@ if k = 3
 The number of subarray is 3
 */
 
-package collections.array;
+package search.collections.array;
 
 import java.util.HashMap;
 

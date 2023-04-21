@@ -1,4 +1,4 @@
-package unionFind;
+package search.unionFind;
 
 public class UnionFind {
     public static Subset[] createSubsets(int n)
