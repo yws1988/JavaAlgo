@@ -17,6 +17,7 @@
         <module>geometry</module>
         <module>graph</module>
         <module>sorting</module>
+        <module>math</module>
     </modules>
 
     <properties>

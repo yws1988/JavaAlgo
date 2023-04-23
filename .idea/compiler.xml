@@ -12,6 +12,7 @@
         <module name="sorting" />
         <module name="excercises" />
         <module name="geometry" />
+        <module name="math" />
         <module name="datastructures" />
         <module name="graph" />
       </profile>
