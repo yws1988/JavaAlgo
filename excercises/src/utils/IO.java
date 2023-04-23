@@ -7,7 +7,7 @@ public class IO
 {
     public static Scanner scanner;
 
-    public static int readInt() { return scanner.nextInt(); }
+    public static int readInt() { int tmp = scanner.nextInt(); scanner.nextLine(); return tmp; }
     public static int[] readIntArray() { return Arrays.stream(readStringArray()).mapToInt(Integer::parseInt).toArray(); }
     public static long readLong() { return scanner.nextLong(); }
     public static long[] readLongArray() { return Arrays.stream(readStringArray()).mapToLong(Long::parseLong).toArray(); }

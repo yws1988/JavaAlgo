@@ -5,9 +5,7 @@ Give n segments, find if it is possible to find the subset of segments whose con
 the length of L.
  */
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.List;
 
 public class SegmentsSumLengthL
 {

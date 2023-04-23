@@ -1,24 +1,56 @@
-package utils;
+package hackerearth.sorting;
 
 import java.io.File;
-import java.lang.reflect.Array;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Scanner;
 
-public class Template
+public class OneSizedGame
 {
-    public static int n;
+    public static int n,t;
     public static int[] ns;
     public static String s;
     public static String[] ss;
 
     public static void solve()
     {
+        t=readInt();
+        for (int i = 0; i < t; i++) {
+            n=readInt();
+            ns=readIntArray();
+            var pq = new PriorityQueue<Pair>(new PairComparator());
+            for (int j = 0; j < n; j++) {
+                pq.add(new Pair(ns[j], j+1));
+            }
+
+            int sum=0;
+            int removedElements=0;
+
+            while(pq.size()!=1){
+                var pair = pq.poll();
+                pair.y-=removedElements;
+                if(pair.x>=sum){
+                    sum+= pair.y;
+                    pq.add(pair);
+                }else{
+                    removedElements++;
+                }
+            }
+
+            var pair = pq.poll();
+            if(sum>pair.x){
+                System.out.println("Kushagra");
+            }else{
+                System.out.println("Ladia");
+            }
+        }
     }
 
     public static Scanner scanner;
 
-    public static void mainf( String[] argv ) throws Exception
+    public static void main(String[] argv) throws Exception
     {
         if(true){
             File file = new File("D:\\Algo\\JavaAlgo\\excercises\\src\\resources\\test.txt");
@@ -26,12 +58,6 @@ public class Template
         }else{
             scanner = new Scanner(System.in);
         }
-
-        n = readInt();
-        ns = readIntArray();
-        s = readString();
-        ss = readStringArray();
-        ss = readLines(n);
 
         solve();
         scanner.close();
@@ -59,9 +85,10 @@ public class Template
     }
 
     public static class PairComparator implements Comparator<Pair> {
+
         @Override
         public int compare(Pair o1, Pair o2) {
-            return o1.x-o2.x;
+            return o1.x-o2.x == 0 ? o1.y - o2.y : o1.x-o2.x;
         }
     }
 }
