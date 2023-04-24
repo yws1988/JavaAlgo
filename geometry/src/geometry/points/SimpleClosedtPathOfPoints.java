@@ -21,20 +21,20 @@ public class SimpleClosedtPathOfPoints {
     public static Point[] getClosestPath(Point[] points)
     {
         var startPoint = Arrays.stream(points).sorted((p1, p2)->{
-            return (int)(p1.Y-p2.Y == 0 ? p1.X-p2.X : p1.Y-p2.Y);
+            return (int)(p1.y -p2.y == 0 ? p1.x -p2.x : p1.y -p2.y);
         }).findFirst().get();
-        var zeroPoints = Arrays.stream(points).filter(p -> p.X == startPoint.X).sorted((p1,p2) -> {return (int)(p1.Y - p2.Y);}).skip(1).collect(Collectors.toList());
-        var restPoints = Arrays.stream(points).filter(p -> p.X != startPoint.X).collect(Collectors.toList());
+        var zeroPoints = Arrays.stream(points).filter(p -> p.x == startPoint.x).sorted((p1, p2) -> {return (int)(p1.y - p2.y);}).skip(1).collect(Collectors.toList());
+        var restPoints = Arrays.stream(points).filter(p -> p.x != startPoint.x).collect(Collectors.toList());
 
         for (var item : restPoints)
         {
-            double height = item.Y - startPoint.Y;
-            double distanceX = item.X - startPoint.X;
+            double height = item.y - startPoint.y;
+            double distanceX = item.x - startPoint.x;
             item.Priority = height / distanceX;
         }
 
-        var restPsPositif = restPoints.stream().filter(p->p.Priority>=0).sorted((p1, p2)->{return (int)(p1.Priority-p2.Priority == 0 ? p1.X-p2.X : p1.Priority-p2.Priority);}).collect(Collectors.toList());
-        var restPsNegatif = restPoints.stream().filter(p -> p.Priority < 0).sorted((p1, p2)->{return (int)(p2.Priority-p1.Priority == 0 ? Math.abs(p1.X-startPoint.X)-Math.abs(p2.X-startPoint.X) : p2.Priority-p1.Priority);}).collect(Collectors.toList());
+        var restPsPositif = restPoints.stream().filter(p->p.Priority>=0).sorted((p1, p2)->{return (int)(p1.Priority-p2.Priority == 0 ? p1.x -p2.x : p1.Priority-p2.Priority);}).collect(Collectors.toList());
+        var restPsNegatif = restPoints.stream().filter(p -> p.Priority < 0).sorted((p1, p2)->{return (int)(p2.Priority-p1.Priority == 0 ? Math.abs(p1.x -startPoint.x)-Math.abs(p2.x -startPoint.x) : p2.Priority-p1.Priority);}).collect(Collectors.toList());
         List<Point> list = List.of(startPoint);
         list.addAll(restPsPositif);
         list.addAll(zeroPoints);

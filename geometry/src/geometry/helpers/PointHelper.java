@@ -5,7 +5,7 @@ import datastructures.geometry.Point;
 public class PointHelper {
     public static int orientationOfThreePoints(Point p1, Point p2, Point p3)
     {
-        double val = (p2.Y - p1.Y) * (p3.X - p2.X) - (p2.X - p1.X) * (p3.Y - p2.Y);
+        double val = (p2.y - p1.y) * (p3.x - p2.x) - (p2.x - p1.x) * (p3.y - p2.y);
 
         if (val == 0) return 0;  // colinear
 
@@ -20,13 +20,13 @@ public class PointHelper {
         double sinTheta = Math.sin(angleInRadians);
         return new Point
                 (
-                        cosTheta * (pointToRotate.X - centerPoint.X) - sinTheta * (pointToRotate.Y - centerPoint.Y) + centerPoint.X,
-                        sinTheta * (pointToRotate.X - centerPoint.X) + cosTheta * (pointToRotate.Y - centerPoint.Y) + centerPoint.Y
+                        cosTheta * (pointToRotate.x - centerPoint.x) - sinTheta * (pointToRotate.y - centerPoint.y) + centerPoint.x,
+                        sinTheta * (pointToRotate.x - centerPoint.x) + cosTheta * (pointToRotate.y - centerPoint.y) + centerPoint.y
                 );
     }
 
     public static double getTwoPointsDistance(Point p1, Point p2)
     {
-        return Math.sqrt(Math.pow((p1.X - p2.X), 2) + Math.pow((p1.Y - p2.Y), 2));
+        return Math.sqrt(Math.pow((p1.x - p2.x), 2) + Math.pow((p1.y - p2.y), 2));
     }
 }

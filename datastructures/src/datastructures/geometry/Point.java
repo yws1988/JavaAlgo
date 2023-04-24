@@ -1,8 +1,8 @@
 package datastructures.geometry;
 
 public class Point {
-    public double X;
-    public double Y;
+    public double x;
+    public double y;
     public double Priority;
 
     public Point()
@@ -11,7 +11,7 @@ public class Point {
 
     public Point(double x, double y)
     {
-        X = x;
-        Y = y;
+        this.x = x;
+        this.y = y;
     }
 }
