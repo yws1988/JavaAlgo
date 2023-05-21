@@ -18,6 +18,7 @@
         <module>graph</module>
         <module>sorting</module>
         <module>math</module>
+        <module>utils</module>
     </modules>
 
     <properties>

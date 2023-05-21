@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="search" />
         <module name="bitmasking" />
+        <module name="utils" />
         <module name="dynamicprogramming" />
         <module name="sorting" />
         <module name="excercises" />
