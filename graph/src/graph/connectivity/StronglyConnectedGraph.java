@@ -6,7 +6,7 @@ import graph.utils.GraphListHelper;
 
 public class StronglyConnectedGraph
 {
-    public boolean IsStronglyConnected(List<Integer>[] graph)
+    public static boolean isStronglyConnected(List<Integer>[] graph)
     {
         int v = graph.length;
         boolean[] vs = new boolean[v];
@@ -33,7 +33,7 @@ public class StronglyConnectedGraph
         return true;
     }
 
-    void DFSUtil(List<Integer>[] g, int i, boolean[] vs)
+    static void DFSUtil(List<Integer>[] g, int i, boolean[] vs)
     {
         vs[i] = true;
 
