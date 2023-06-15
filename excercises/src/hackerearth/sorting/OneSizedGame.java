@@ -50,7 +50,7 @@ public class OneSizedGame
 
     public static Scanner scanner;
 
-    public static void main(String[] argv) throws Exception
+    public static void mainF(String[] argv) throws Exception
     {
         if(true){
             File file = new File("D:\\Algo\\JavaAlgo\\excercises\\src\\resources\\test.txt");
