@@ -1,4 +1,4 @@
-package cycle;
+package graph.circle;
 
 import java.util.List;
 

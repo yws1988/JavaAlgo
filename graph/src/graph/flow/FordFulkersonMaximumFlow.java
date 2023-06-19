@@ -1,6 +1,14 @@
 package graph.flow;
 
+/*
+FordFulkersonMaximumFlowProblem
+
+https://www.geeksforgeeks.org/ford-fulkerson-algorithm-for-maximum-flow-problem/
+*/
+
+
 import java.util.LinkedList;
+
 
 public class FordFulkersonMaximumFlow
 {
