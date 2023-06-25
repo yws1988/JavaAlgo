@@ -8,6 +8,19 @@ package graph.connectivity;
     1 1 1 1
     0 1 1 0
     1 1 0 1
+
+    1 1 0 0 0
+    1 1 1 0 0
+    0 1 1 1 0
+    0 0 1 1 1
+    0 0 0 1 1
+
+    1 1 0 0 0
+    2 2 1 0 0
+    2 3 2 1 0
+    2 3 3 2 1
+    2 3 3 3 2
+
  if (i, j) element is 1, it means ith Range is intersectant with jth Range.
 
  Expected Output is 3
