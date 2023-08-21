@@ -33,7 +33,8 @@ public class TopologicalOrderedStrings {
     /// <param name="n">the number of ingredients</param>
     public static String getTopologicalOrder(String[][] orderedStrings, int n)
     {
-        var g = GraphListHelper.convertStringsToGraph(orderedStrings, n);
+        var integerStringGraph = new HashMap<Integer, String>();
+        var g = GraphListHelper.convertStringsToGraph(orderedStrings, n, integerStringGraph);
 
         if (CycleInDirectedGraph.doesGraphContainsCycle(g))
         {
@@ -42,6 +43,6 @@ public class TopologicalOrderedStrings {
 
         var stack = TopologicalSorting.getSortingOrder(g);
 
-        return String.join(" ", stack.stream().toList());
+        return String.join(" ", stack.stream().map(s -> integerStringGraph.get(s)).toList());
     }
 }
