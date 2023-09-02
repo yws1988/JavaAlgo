@@ -1,6 +1,9 @@
 package utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
 
 public class ArrayHelper{
 
@@ -35,6 +38,16 @@ public class ArrayHelper{
         }
 
         return newArray;
+    }
+
+    public static List<Integer>[] buildListArray(int v){
+        var graph = new ArrayList[v];
+
+        for (int i = 0; i < v; i++) {
+            graph[i] = new ArrayList<Integer>();
+        }
+
+        return graph;
     }
 
 }

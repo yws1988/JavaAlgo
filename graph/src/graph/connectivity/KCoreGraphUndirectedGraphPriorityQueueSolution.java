@@ -26,7 +26,7 @@ public class KCoreGraphUndirectedGraphPriorityQueueSolution {
         pq.addAll(pairs);
         var set = new HashSet<Integer>(IntStream.range(0, v).boxed().collect(Collectors.toList()));
 
-        while(pq.size()>0 && set.size()>0){
+        while(pq.size()>0 || set.size()>0){
             var pair = pq.poll();
             if(pair.y>=k){
                 break;

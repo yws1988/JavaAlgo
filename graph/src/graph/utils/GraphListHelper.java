@@ -3,6 +3,40 @@ package graph.utils;
 import java.util.*;
 
 public class GraphListHelper {
+    public static List<Integer>[] buildListArray(int n)
+    {
+        var graph = new ArrayList[n];
+
+        for (int i = 0; i < n; i++) {
+            graph[i] = new ArrayList<Integer>();
+        }
+
+        return graph;
+    }
+
+    public static List<Integer>[] buildListArray(int n, int[][] arr, boolean isDirected)
+    {
+        var graph = new ArrayList[n];
+
+        for (int i = 0; i < n; i++) {
+            graph[i] = new ArrayList<Integer>();
+        }
+
+        for (var item : arr)
+        {
+            int src = item[0];
+            int des = item[1];
+            graph[src].add(des);
+
+            if (!isDirected)
+            {
+                graph[des].add(src);
+            }
+        }
+
+        return graph;
+    }
+
     public static List<Integer>[] getTransposeGraph(List<Integer>[] graph)
     {
         int v = graph.length;
