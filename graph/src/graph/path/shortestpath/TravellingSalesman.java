@@ -44,13 +44,13 @@ public class TravellingSalesman
 
         for (int mask = 1; mask < max; mask++)
         {
-            for (int s = 1; s < v; s++)
+            for (int d = 1; d < v; d++)
             {
-                for (int d = 1; d < v; d++)
+                for (int s = 1; s < v; s++)
                 {
-                    if (graph[s][d] != Integer.MAX_VALUE && (mask >> s & 1) == 1 && (mask >> d & 1) == 1 && dp[d][mask & ~(1 << s)] != Integer.MAX_VALUE)
+                    if (graph[d][s] != Integer.MAX_VALUE && (mask >> d & 1) == 1 && (mask >> s & 1) == 1 && dp[s][mask & ~(1 << d)] != Integer.MAX_VALUE)
                     {
-                        dp[s][mask] = Math.min(dp[s][mask], dp[d][mask & ~(1 << s)] + graph[s][d]);
+                        dp[d][mask] = Math.min(dp[d][mask], dp[s][mask & ~(1 << d)] + graph[d][s]);
                     }
                 }
             }
