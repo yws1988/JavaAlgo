@@ -22,12 +22,14 @@ public class NumOfInversionPairsInArray
     {
         int n = ns.length;
         var sortedNs = Arrays.copyOf(ns, ns.length);;
-        Arrays.sort(sortedNs, Collections.reverseOrder());
+        Arrays.sort(sortedNs);
 
         for (int j = 0; j < n; j++)
         {
             ns[j] = Arrays.binarySearch(sortedNs, ns[j]);
         }
+
+        Collections.reverse(Arrays.asList(ns));
 
         var bit = new BinaryIndexedTree(n);
 

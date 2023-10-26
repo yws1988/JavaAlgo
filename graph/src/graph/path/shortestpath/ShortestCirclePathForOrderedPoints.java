@@ -1,7 +1,7 @@
 package graph.path.shortestpath;
-// Unsolved
 
 /*
+    Bitonic circle path problem:
     Give n points number from 0 to n-1, the matrix[i, j] reprensents distances from i to j.
     Create a circle start from point 0, go through the points to n-1(ascending order by numbers),
     then back to 0 (descending order by numbers), every point should be visited once.
