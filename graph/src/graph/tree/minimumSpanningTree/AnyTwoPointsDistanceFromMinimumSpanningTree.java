@@ -33,15 +33,15 @@ public class AnyTwoPointsDistanceFromMinimumSpanningTree
 
         while (queue.size() > 0)
         {
-            var currentNode = queue.poll();
+            var currentNode = queue.pop();
             vs[currentNode] = true;
 
-            foreach (var pair in graph[currentNode])
+            for (var pair : graph[currentNode])
             {
-                if (!vs[pair.Des])
+                if (!vs[pair.des])
                 {
-                    dic[(root, pair.Des)] = dic[(root, pair.Src)] + pair.Weight;
-                    queue.Enqueue(pair.Des);
+                    dic.put(new Key(root, pair.des), dic.get(new Key(root, pair.src)) + pair.weight);
+                    queue.add(pair.des);
                 }
             }
         }
