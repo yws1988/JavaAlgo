@@ -66,7 +66,7 @@ public class StringHelper
     /// <param name="sequence"></param>
     /// <param name="str"></param>
     /// <returns></returns>
-    public static boolean IsSequenceInString(String sequence, String str)
+    public static boolean isSequenceInString(String sequence, String str)
     {
         int i = 0, j = 0;
 
