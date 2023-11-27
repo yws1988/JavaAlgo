@@ -9,79 +9,81 @@ exactly one job to each agent in such a way that the total cost of the assignmen
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.PriorityQueue;
 
 public class JobAssignment {
-    public static int N;
-    public static double[][] G;
+    public static int len;
+    public static double[][] graph;
 
-    public static void Start(double[][] jobs)
-    {
-        N = jobs.GetLength(0);
-        G = jobs;
+    public static double getLowestCosts(double[][] jobs) throws CloneNotSupportedException {
+        len = jobs.length;
+        graph = jobs;
 
         NodeJob root = new NodeJob(0, -1);
-        bool[] avs = new bool[N];
-        for (int i = 0; i < N; i++)
+        boolean[] avs = new boolean[len];
+        for (int i = 0; i < len; i++)
         {
             avs[i] = true;
         }
         root.available = avs;
         root.parent = null;
 
-        PriorityQueue<NodeJob> queue = new PriorityQueue<NodeJob>();
-        queue.Enqueue(root);
-        while (queue.Count() > 0)
+        var queue = new PriorityQueue<NodeJob>(new NodeJobComparator());
+        queue.add(root);
+        while (queue.size() > 0)
         {
-            var min = queue.Dequeue();
-            if (min.Worker == N - 1)
+            var currentNode = queue.poll();
+            if (currentNode.worker == len - 1)
             {
-                Print(min);
-                return;
+                print(currentNode);
+                return currentNode.cost;
             }
 
-            for (int i = 0; i < N; i++)
+            for (int i = 0; i < len; i++)
             {
-                if (min.available[i])
+                if (currentNode.available[i])
                 {
-                    var child = min.Clone();
-                    child.P = min;
+                    var child = currentNode.clone();
+                    child.parent = currentNode;
                     child.available[i] = false;
-                    child.Job = i;
-                    child.C = min.C + G[child.Worker][i];
-                    child.Bound = GetBound(child);
-                    queue.Enqueue(child);
+                    child.job = i;
+                    child.cost = currentNode.cost + graph[child.worker][i];
+                    child.bound = getBound(child);
+                    queue.add(child);
                 }
             }
         }
     }
 
-    public static void Print(NodeJob node)
+    public static void print(NodeJob node)
     {
-        Console.WriteLine(node.cost);
+        System.out.println(node.cost);
         while (node.parent != null)
         {
-            Console.WriteLine(node.worker +" : "+node.job);
+            System.out.println(node.worker +" : "+node.job);
             node = node.parent;
         }
     }
 
-    public static double GetBound(NodeJob n)
+    public static double getBound(NodeJob node)
     {
-        double b = n.cost;
-        for (int i = n.worker +1; i < N; i++)
+        double bound = node.cost;
+        var availableCopy = Arrays.copyOf(node.available, node.available.length);
+        for (int i = node.worker +1; i < len; i++)
         {
-            double min = double.MaxValue;
-            for (int j = 0; j < N; j++)
+            double min = Double.MAX_VALUE;
+            for (int j = 0; j < len; j++)
             {
-                if (n.available[j] && G[i][j]<min)
+                if (availableCopy[j] && graph[i][j]<min)
                 {
-                    min = G[i][j];
+                    min = graph[i][j];
+                    availableCopy[j]=false;
                 }
             }
-            b += min;
+            bound += min;
         }
 
-        return b;
+        return bound;
     }
 
     public static class NodeJob
