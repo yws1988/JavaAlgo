@@ -53,6 +53,8 @@ public class JobAssignment {
                 }
             }
         }
+
+        return Double.MAX_VALUE;
     }
 
     public static void print(NodeJob node)
@@ -121,5 +123,4 @@ public class JobAssignment {
             else return -1;
         }
     }
-
 }

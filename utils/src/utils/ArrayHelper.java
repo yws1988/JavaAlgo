@@ -2,8 +2,8 @@ package utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class ArrayHelper{
 
@@ -48,6 +48,27 @@ public class ArrayHelper{
         }
 
         return graph;
+    }
+
+
+    public static List<List<Integer>> allPermutations = new ArrayList<>();
+
+    public static void generatePermutations(int n, List<Integer> elements) {
+        if(n == 1) {
+            allPermutations.add(new ArrayList<>(elements));
+        } else {
+            generatePermutations(n - 1, elements);
+
+            for(int i = 0; i < n-1; i++) {
+                if(n % 2 == 0) {
+                    Collections.swap(elements, i, n-1);
+                } else {
+                    Collections.swap(elements, 0, n-1);
+                }
+
+                generatePermutations(n - 1, elements);
+            }
+        }
     }
 
 }
