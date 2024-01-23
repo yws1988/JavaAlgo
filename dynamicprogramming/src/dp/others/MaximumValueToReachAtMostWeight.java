@@ -1,3 +1,4 @@
+// Knapsack problem
 /// Given two integer arrays val[0..n-1] and wt[0..n-1] that represent values and weights associated with n items
 /// respectively. Find out the maximum value subset of val[] such that sum of the weights of this subset is smaller than or equal
 /// to Knapsack capacity cap.
