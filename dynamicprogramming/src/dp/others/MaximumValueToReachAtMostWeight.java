@@ -6,11 +6,13 @@
 package dp.others;
 
 public class MaximumValueToReachAtMostWeight {
+    public static  int[][] dp;
+
     public static int getMaxValue(Pair[] arr, int capacity)
     {
         int n = arr.length;
 
-        int[][] dp = new int[capacity + 1][n];
+        dp = new int[capacity + 1][n];
 
         for (int i = 1; i <= capacity; i++)
         {
