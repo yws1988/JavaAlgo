@@ -1,5 +1,7 @@
 package graph.path;
 
+import java.util.LinkedList;
+
 public class FloodFillFromSourceToDestinationInMatrix
 {
     public static int n;
@@ -8,7 +10,7 @@ public class FloodFillFromSourceToDestinationInMatrix
     public static void solve()
     {
         int srcx = 0, srcy = 0;
-        var queue = new Queue<(int, int, int)>();
+        var queue = new LinkedList<Triple>();
 
         for (int i = 0; i < n; i++)
         {
@@ -16,7 +18,7 @@ public class FloodFillFromSourceToDestinationInMatrix
             {
                 if (cs[i][j] == 'M')
                 {
-                    queue.Enqueue((i, j, 0));
+                    queue.add(new Triple(i, j, 0));
                 }
                 else if (cs[i][j] == 'C')
                 {
@@ -29,13 +31,13 @@ public class FloodFillFromSourceToDestinationInMatrix
         int[] xMove = { 1, 0, -1, 0 };
         int[] yMove = { 0, -1, 0, 1 };
 
-        queue.Enqueue((srcx, srcy, 0));
+        queue.add(new Triple(srcx, srcy, 0));
 
-        while (queue.Any())
+        while (queue.size()>0)
         {
-            var p = queue.Dequeue();
-            int x = p.Item1;
-            int y = p.Item2;
+            var p = queue.pop();
+            int x = p.x;
+            int y = p.y;
             char pChar = cs[x][y];
 
             for (int u = 0; u < 4; u++)
@@ -55,11 +57,11 @@ public class FloodFillFromSourceToDestinationInMatrix
                     if (cChar == '.')
                     {
                         cs[tx][ty] = 'C';
-                        queue.Enqueue((tx, ty, p.Item3 + 1));
+                        queue.add(new Triple(tx, ty, p.z + 1));
                     }
                     else if (cChar == 'O')
                     {
-                        Console.WriteLine(p.Item3 + 1);
+                        System.out.println(p.z + 1);
                         return;
                     }
                 }
@@ -67,16 +69,28 @@ public class FloodFillFromSourceToDestinationInMatrix
                 {
                     if (cChar == 'O')
                     {
-                        Console.WriteLine(0);
+                        System.out.println(0);
                         return;
                     }
                     else if (cChar != '#')
                     {
                         cs[tx][ty] = '#';
-                        queue.Enqueue((tx, ty, p.Item3 + 1));
+                        queue.add(new Triple(tx, ty, p.z + 1));
                     }
                 }
             }
+        }
+    }
+
+    public static class Triple{
+        public int x;
+        public int y;
+        public int z;
+
+        public Triple(int x, int y, int z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
         }
     }
 }
