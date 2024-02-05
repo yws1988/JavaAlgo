@@ -19,7 +19,8 @@ mojito < fraise < club-mate < pamplemousse < grenadine
 
 
 import graph.circle.CycleInDirectedGraph;
-import graph.utils.GraphListHelper;
+import graph.utils.*;
+import utils.graph.GraphHelper;
 
 import java.util.HashMap;
 
@@ -32,7 +33,7 @@ public class TopologicalOrderedStrings {
     public static String getTopologicalOrder(String[][] orderedStrings, int n)
     {
         var integerStringGraph = new HashMap<Integer, String>();
-        var g = GraphListHelper.convertStringsToGraph(orderedStrings, n, integerStringGraph);
+        var g = GraphHelper.convertStringsToGraph(orderedStrings, n, integerStringGraph);
 
         if (CycleInDirectedGraph.doesGraphContainsCycle(g))
         {

@@ -1,7 +1,8 @@
 package graph.connectivity;
 
+import utils.graph.GraphHelper;
+
 import java.util.List;
-import graph.utils.GraphListHelper;
 
 public class StronglyConnectedGraph
 {
@@ -16,7 +17,7 @@ public class StronglyConnectedGraph
             if(!tmp) return false;
         }
 
-        var tGraph = GraphListHelper.getTransposeGraph(graph);
+        var tGraph = GraphHelper.getTransposeGraph(graph);
 
         for (int i = 0; i < v; i++)
         {
