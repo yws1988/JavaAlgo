@@ -1,8 +1,11 @@
-package graph.utils;
+package utils.graph;
+
+import datastructures.tuple.Pair;
+import datastructures.tuple.Triple;
 
 import java.util.*;
 
-public class GraphListHelper {
+public class GraphHelper {
     public static List<Integer>[] buildListArray(int n)
     {
         var graph = new ArrayList[n];
@@ -54,6 +57,54 @@ public class GraphListHelper {
         }
 
         return reversGraph;
+    }
+
+    public static int[][] getTransposeGraph(int[][] graph)
+    {
+        int n = graph.length;
+
+        var rGraph = new int[n][n];
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                rGraph[i][j] = graph[j][i];
+            }
+        }
+
+        return rGraph;
+    }
+
+    public static int[][] convertTripleToGraphMatrix(List<Triple> list, int v, boolean isDirected)
+    {
+        int[][] graph = new int[v][v];
+        for (var item : list)
+        {
+            graph[item.x][item.y] = item.z;
+
+            if (!isDirected)
+            {
+                graph[item.y][item.x] = item.z;
+            }
+        }
+
+        return graph;
+    }
+
+    public static int[][] convertListToGraphMatrix(List<Pair> list, int v, boolean isDirected)
+    {
+        int[][] graph = new int[v][v];
+        for (var item : list)
+        {
+            graph[item.x][item.y] = 1;
+
+            if (!isDirected)
+            {
+                graph[item.y][item.x] = 1;
+            }
+        }
+
+        return graph;
     }
 
     /*
