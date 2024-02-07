@@ -140,4 +140,42 @@ public class GraphHelper {
 
         return g;
     }
+
+
+    /// <summary>
+    /// Get the vertex which contains the most common neighbours of the
+    /// specified vertex
+    /// </summary>
+    /// <param name="graph">matrix graph with n vertex</param>
+    /// <param name="vertex">the specified Vertex</param>
+    /// <returns>index of the vertex, the number of the common neighbours</returns>
+    public static Pair GetVertexWithMaxNumberOfCommonNeighbours(int[][] graph, int vertex)
+    {
+        int n = graph.length;
+        int max = 0;
+        int idx = -1;
+
+        for (int i = 0; i < n; i++)
+        {
+            if (vertex != i)
+            {
+                int num = 0;
+                for (int j = 0; j < n; j++)
+                {
+                    if (j != vertex && j != i && graph[vertex][j] == 1 && graph[i][j] == 1)
+                    {
+                        num++;
+                    }
+                }
+
+                if (num >= max)
+                {
+                    idx = i;
+                    max = num;
+                }
+            }
+        }
+
+        return (idx, max);
+    }
 }
