@@ -1,8 +1,9 @@
 package graph.connectivity;
 
+import utils.graph.GraphHelper;
+
 import java.util.List;
 import java.util.Stack;
-import graph.utils.GraphListHelper;
 
 public class StronglyConnectedComponentList
 {
@@ -26,7 +27,7 @@ public class StronglyConnectedComponentList
             }
         }
 
-        var rGraph = GraphListHelper.getTransposeGraph(graph);
+        var rGraph = GraphHelper.getTransposeGraph(graph);
 
         int[] scc = new int[v];
         for (int i = 0; i < v; i++)

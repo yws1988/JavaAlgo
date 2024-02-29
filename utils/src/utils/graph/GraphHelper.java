@@ -6,39 +6,6 @@ import datastructures.tuple.Triple;
 import java.util.*;
 
 public class GraphHelper {
-    public static List<Integer>[] buildListArray(int n)
-    {
-        var graph = new ArrayList[n];
-
-        for (int i = 0; i < n; i++) {
-            graph[i] = new ArrayList<Integer>();
-        }
-
-        return graph;
-    }
-
-    public static List<Integer>[] buildListArray(int n, int[][] arr, boolean isDirected)
-    {
-        var graph = new ArrayList[n];
-
-        for (int i = 0; i < n; i++) {
-            graph[i] = new ArrayList<Integer>();
-        }
-
-        for (var item : arr)
-        {
-            int src = item[0];
-            int des = item[1];
-            graph[src].add(des);
-
-            if (!isDirected)
-            {
-                graph[des].add(src);
-            }
-        }
-
-        return graph;
-    }
 
     public static List<Integer>[] getTransposeGraph(List<Integer>[] graph)
     {
@@ -176,6 +143,6 @@ public class GraphHelper {
             }
         }
 
-        return (idx, max);
+        return new Pair(idx, max);
     }
 }

@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TravellingSalesmanTest {
 
     @Test
-    void solve() {
+    public void solve() {
         //Adjacency matrix for the given graph
         int adj[][] = {{0, 10, 15, 20},
                         {10, 0, 35, 25},

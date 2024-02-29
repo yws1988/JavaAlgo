@@ -81,8 +81,8 @@ public class SegmentTreeCompare {
     }
 
     public static class Node implements Comparable<Node>{
-        int index;
-        int value;
+        public int index;
+        public int value;
 
         public Node(int index, int value)
         {

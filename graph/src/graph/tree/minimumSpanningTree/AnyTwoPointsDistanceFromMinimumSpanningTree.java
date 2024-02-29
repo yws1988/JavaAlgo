@@ -1,18 +1,20 @@
 package graph.tree.minimumSpanningTree;
 
+import datastructures.tuple.Triple;
+
 import java.util.*;
 import java.util.stream.IntStream;
 
 public class AnyTwoPointsDistanceFromMinimumSpanningTree
 {
-    public static Map<Key, Integer> getMinimumDistance(List<MinimumSpanningTree.Pair>[] graph)
+    public static Map<Key, Integer> getMinimumDistance(List<Triple>[] graph)
     {
         int n = graph.length;
 
         MinimumSpanningTree.getMinimumSpanningTree(graph);
-        List<MinimumSpanningTree.Pair> path = MinimumSpanningTree.path;
+        List<Triple> path = MinimumSpanningTree.path;
 
-        List<MinimumSpanningTree.Pair>[] newGraph = (List<MinimumSpanningTree.Pair>[]) IntStream.range(0, n).mapToObj(idx -> new ArrayList<MinimumSpanningTree.Pair>()).toArray();
+        List<Triple>[] newGraph = (List<Triple>[]) IntStream.range(0, n).mapToObj(idx -> new ArrayList<Triple>()).toArray();
 
         var distances = new HashMap<Key, Integer>();
 
@@ -25,7 +27,7 @@ public class AnyTwoPointsDistanceFromMinimumSpanningTree
         return distances;
     }
 
-    static void bfs(int root, Map<Key, Integer> dic, List<MinimumSpanningTree.Pair>[] graph, boolean[] vs)
+    static void bfs(int root, Map<Key, Integer> dic, List<Triple>[] graph, boolean[] vs)
     {
         var queue = new LinkedList<Integer>();
         queue.add(root);
@@ -38,10 +40,10 @@ public class AnyTwoPointsDistanceFromMinimumSpanningTree
 
             for (var pair : graph[currentNode])
             {
-                if (!vs[pair.des])
+                if (!vs[pair.y])
                 {
-                    dic.put(new Key(root, pair.des), dic.get(new Key(root, pair.src)) + pair.weight);
-                    queue.add(pair.des);
+                    dic.put(new Key(root, pair.y), dic.get(new Key(root, pair.x)) + pair.z);
+                    queue.add(pair.y);
                 }
             }
         }

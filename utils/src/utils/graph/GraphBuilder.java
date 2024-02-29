@@ -7,12 +7,46 @@ import java.util.stream.IntStream;
 
 public class GraphBuilder
 {
-    public static List<ArrayList<Integer>> createListArray(int n)
+    public static <T> List<T>[] buildListArray(int n)
+    {
+        var graph = new ArrayList[n];
+
+        for (int i = 0; i < n; i++) {
+            graph[i] = new ArrayList<T>();
+        }
+
+        return graph;
+    }
+
+    public static <T> List<T>[] buildListArray(int n, int[][] arr, boolean isDirected)
+    {
+        var graph = new ArrayList[n];
+
+        for (int i = 0; i < n; i++) {
+            graph[i] = new ArrayList<T>();
+        }
+
+        for (var item : arr)
+        {
+            int src = item[0];
+            int des = item[1];
+            graph[src].add(des);
+
+            if (!isDirected)
+            {
+                graph[des].add(src);
+            }
+        }
+
+        return graph;
+    }
+
+    public static List<ArrayList<Integer>> buildListList(int n)
     {
         return IntStream.rangeClosed(0, n).boxed().map(s -> new ArrayList<Integer>()).toList();
     }
 
-    public static List<ArrayList<Integer>> createListArray(int n, int[][] arr, boolean isDirected)
+    public static List<ArrayList<Integer>> buildListList(int n, int[][] arr, boolean isDirected)
     {
         var graph = IntStream.rangeClosed(0, n).boxed().map(s -> new ArrayList<Integer>()).toList();
         for (var item : arr)
@@ -30,7 +64,7 @@ public class GraphBuilder
         return graph;
     }
 
-    public static List<HashSet<Integer>> createSetArray(int n)
+    public static List<HashSet<Integer>> buildSetList(int n)
     {
         return IntStream.rangeClosed(0, n).boxed().map(s -> new HashSet<Integer>()).toList();
     }
