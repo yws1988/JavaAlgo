@@ -13,8 +13,8 @@ public class IO
     public static long[] readLongArray() { return Arrays.stream(readStringArray()).mapToLong(Long::parseLong).toArray(); }
     public static double readDouble() { return scanner.nextDouble(); }
     public static double[] readDoubleArray() { return Arrays.stream(readStringArray()).mapToDouble(Double::parseDouble).toArray(); }
-    public static double[][] readDoubleMatrix(int numberOfRows) { double[][] matrix = new double[numberOfRows][]; for (int i = 0; i < numberOfRows; i++) matrix[i] = readDoubleArray(); return matrix; }
     public static int[][] readIntMatrix(int numberOfRows) { int[][] matrix = new int[numberOfRows][]; for (int i = 0; i < numberOfRows; i++) matrix[i] = readIntArray(); return matrix; }
+    public static double[][] readDoubleMatrix(int numberOfRows) { double[][] matrix = new double[numberOfRows][]; for (int i = 0; i < numberOfRows; i++) matrix[i] = readDoubleArray(); return matrix; }
     public static String readString() { return scanner.nextLine(); }
     public static String[] readStringArray() { return scanner.nextLine().split("[ \t]"); }
     public static String[] readLines(int quantity) { String[] lines = new String[quantity]; for (int i = 0; i < quantity; i++) lines[i] = scanner.nextLine().trim(); return lines; }

@@ -20,6 +20,7 @@ public class BinaryIndexedTree
             update(i, arr[i]);
     }
 
+    // index of the array based 0, the sum of all elements from 0 to index
     public int query(int index)
     {
         int sum = 0;

@@ -1,9 +1,8 @@
 package graph.traversal;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import datastructures.tuple.Pair;
+
+import java.util.*;
 
 public class BFSIteration {
     public static List<Integer> bfs(List<Integer>[] graph, int src)
@@ -31,5 +30,67 @@ public class BFSIteration {
         }
 
         return result;
+    }
+
+    /***
+     * Get the shortest distance from vertex src to vertex des
+     * @param graph
+     * @param src
+     * @param des
+     * @param vs
+     * @return -1 if is not reachable
+     */
+    public static int bfs(List<Integer>[] graph, int src, int des, Boolean[] vs)
+    {
+        var queue = new LinkedList<Pair>();
+        queue.add(new Pair(src, 1));
+
+        while (queue.size() > 0)
+        {
+            var p = queue.pop();
+            for (var c : graph[p.x])
+            {
+                if (!vs[c])
+                {
+                    if (c == des) return p.y + 1;
+
+                    vs[c] = true;
+                    queue.add(new Pair(c, p.y + 1));
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    /***
+     * Get the shortest distance from vertex src to vertex des
+     * @param graph
+     * @param src
+     * @param des
+     * @param vs
+     * @return -1 if is not reachable
+     */
+    public static int bfs(HashSet<Integer>[] graph, int src, int des, Boolean[] vs)
+    {
+        var queue = new LinkedList<Pair>();
+        queue.add(new Pair(src, 1));
+
+        while (queue.size() > 0)
+        {
+            var p = queue.pop();
+            for (var c : graph[p.x])
+            {
+                if (!vs[c])
+                {
+                    if (c == des) return p.y + 1;
+
+                    vs[c] = true;
+                    queue.add(new Pair(c, p.y + 1));
+                }
+            }
+        }
+
+        return -1;
     }
 }

@@ -115,7 +115,7 @@ public class KthSmallestSegmentsContainsPoint
 
             for (PairQuery query : listOfQueryPair[i])
             {
-                int k = query.k, low = 1, high = n;
+                int k = query.k, low = 0, high = n-1;
 
                 while (low < high)
                 {
