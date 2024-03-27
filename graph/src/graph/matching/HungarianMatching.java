@@ -234,5 +234,26 @@ public class HungarianMatching {
         return ans;
     }
 
+    public static int getMaxCostWithDifferentDimensions(int[][] arr, int M, int N) {
+        final int MIN_VALUE = -100000;
+
+        n = Math.max(M, N);
+        setup();
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if(i<M && j<N){
+                    cost[i][j] = arr[i][j];
+                }else{
+                    cost[i][j]= MIN_VALUE;
+                }
+            }
+        }
+
+        int ans = hungarian();
+
+        return ans;
+    }
+
 }
 
