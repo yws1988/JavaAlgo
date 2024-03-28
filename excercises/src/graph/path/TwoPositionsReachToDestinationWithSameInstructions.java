@@ -40,29 +40,37 @@ public class TwoPositionsReachToDestinationWithSameInstructions  {
             var graphKey1 = new GraphKey(childNode.key.src1, childNode.key.dir);
             var graphKey2 = new GraphKey(childNode.key.src2, childNode.key.dir);
 
-            Intersect these two collections
-            if (graph.get(graphKey1).(graph.get(graphKey2)).Any())
+            List<Integer> childrenSrc1 = graph.get(graphKey1);
+            List<Integer> childrenSrc2 = graph.get(graphKey2);
+
+            if(childrenSrc1 == null || childrenSrc2 == null){
+                continue;
+            }
+
+
+            if (!Collections.disjoint(childrenSrc1, childrenSrc2))
             {
-                res = cNode.Path;
+                resPath = childNode.path;
                 found = true;
                 break;
             }
 
-            foreach (var csr1 in dic[graphKey1])
+            for (var csr1 : childrenSrc1)
             {
-                foreach (var csr2 in dic[graphKey2])
+                for (var csr2 : childrenSrc2)
                 {
-                    foreach (var d in direction)
+                    for (var d : direction)
                     {
-                        if (!vs.Contains((csr1, csr2, d)) && dic.ContainsKey((csr1, d)) && dic.ContainsKey((csr2, d)))
+                        var nodeKey = new NodeKey(csr1, csr2, d);
+                        if (!vs.contains(nodeKey) && graph.containsKey(new GraphKey(csr1, d)) && graph.containsKey(new GraphKey(csr2, d)))
                         {
-                            var node = new Node(csr1, csr2, d);
-                            node.path = new List<string>(cNode.Path);
-                            node.path.Add(d);
-                            queue.Enqueue(node);
+                            var node = new Node(nodeKey, null);
+                            node.path = new ArrayList<>(childNode.path);
+                            node.path.add(d);
+                            queue.add(node);
 
-                            vs.Add((csr1, csr2, d));
-                            vs.Add((csr2, csr1, d));
+                            vs.add(nodeKey);
+                            vs.add(new NodeKey(csr2, csr1, d));
                         }
                     }
                 }
