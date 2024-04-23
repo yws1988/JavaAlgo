@@ -12,7 +12,7 @@ public class StronglyConnectedComponentList
     /// </summary>
     /// <param name="graph"></param>
     /// <returns></returns>
-    public static int[] getSCC(List<Integer>[] graph)
+    public static int[] getSCC(List<Integer>[] graph, boolean useRootNodeAsComponentId)
     {
         var stack = new Stack<Integer>();
         int v = graph.length;
@@ -41,7 +41,7 @@ public class StronglyConnectedComponentList
             int i = stack.pop();
             if (scc[i]==-1)
             {
-                DFSComponents(i, scc, rGraph, numCompoents);
+                DFSComponents(i, scc, rGraph, useRootNodeAsComponentId ? i : numCompoents);
             }
             numCompoents++;
         }
