@@ -48,7 +48,9 @@ public class StudentClassesArrangement {
         int[] stronglyConnectedComponents = getSCC(graph, true);
         int len = graph.length;
 
-        List<Integer>[] SccByComponentId = (ArrayList<Integer>[]) IntStream.range(0, len).mapToObj(s -> new ArrayList<Integer>()).toArray();
+        List<Integer>[] SccByComponentId = new ArrayList[len];
+        Arrays.setAll(SccByComponentId, ArrayList<Integer>::new);
+
         for (int i = 0; i < n; ++i)
         {
             if (stronglyConnectedComponents[2 * i] == stronglyConnectedComponents[2 * i + 1])
@@ -61,7 +63,9 @@ public class StudentClassesArrangement {
             SccByComponentId[stronglyConnectedComponents[2 * i + 1]].add(2 * i + 1);
         }
 
-        List<Integer>[] graphForTopologicalSorting = (List<Integer>[]) IntStream.range(0, len).mapToObj(s -> new ArrayList<Integer>()).toArray();
+        List<Integer>[] graphForTopologicalSorting = new ArrayList[len];
+        Arrays.setAll(graphForTopologicalSorting, ArrayList<Integer>::new);
+
         for (int i = 0; i < len; ++i)
         {
             graphForTopologicalSorting[i].add(stronglyConnectedComponents[i]);
@@ -76,7 +80,7 @@ public class StudentClassesArrangement {
 
         int[] cv = new int[n];
 
-        // to verify if it needs to revers
+        // to verify if it needs to reverse
         for (int i : stack)
         {
             if (cv[i / 2] != 0) continue;

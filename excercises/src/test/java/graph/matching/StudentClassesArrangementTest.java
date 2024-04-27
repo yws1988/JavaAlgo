@@ -14,6 +14,6 @@ class StudentClassesArrangementTest {
 
         int[] result = StudentClassesArrangement.getArrangements(n, studentSlots);
 
-        assertEquals(new int[]{1, 2, 1, 1}, result);
+        assertArrayEquals(new int[]{1, 2, 1, 1}, result);
     }
 }
