@@ -21,13 +21,11 @@
             <groupId>org.algo</groupId>
             <artifactId>datastructures</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.algo</groupId>
             <artifactId>datastructures</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

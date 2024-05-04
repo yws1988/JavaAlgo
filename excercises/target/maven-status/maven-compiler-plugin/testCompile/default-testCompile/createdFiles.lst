@@ -1,0 +1,5 @@
+graph\matching\MaximumCommonNeighboursAssignmentTest.class
+other\MagicFunctionTest.class
+graph\matching\StudentClassesArrangementTest.class
+branchAndBounds\TravellingSalesmanTest.class
+bruteForce\DNASequenceTest.class
