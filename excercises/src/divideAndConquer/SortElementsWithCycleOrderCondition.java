@@ -1,4 +1,4 @@
-package DivideAndConquer;
+package divideAndConquer;
 
 /*
     Given a list of node, each node contains three integer, sort the node that should satisfy the following condition,
