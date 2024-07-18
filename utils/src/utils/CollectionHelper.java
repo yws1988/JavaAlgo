@@ -71,4 +71,30 @@ public class CollectionHelper {
 
         return result;
     }
+
+    /***
+     * return the index of the first value which is greater or equal than specified key
+     * @param list sorted array
+     * @param greaterOrEqualValue the key
+     * @return
+     */
+    public static int binarySearch(List<Long> list, long greaterOrEqualValue){
+        int size = list.size();
+        int low = 0;
+        int high = size-1;
+
+        while (low <= high) {
+            int mid = (low + high) >> 1;
+            long midVal = list.get(mid);
+
+            if (midVal < greaterOrEqualValue)
+                low = mid + 1;
+            else if (midVal > greaterOrEqualValue)
+                high = mid - 1;
+            else
+                return mid; // key found
+        }
+
+        return low == size ? -1 : low;  // key not found.
+    }
 }

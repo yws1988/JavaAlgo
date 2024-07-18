@@ -31,9 +31,9 @@ public class DijsktraShortestPath
     static int calculate(int[][] graph, int src, int des, int v, int[] weights, int[] parents)
     {
         var visited = new boolean[v];
-        var queue = new PriorityQueue<Node>(new NodeComparator());
+        var queue = new PriorityQueue<Edge>(new NodeComparator());
 
-        queue.add(new Node(src, 0));
+        queue.add(new Edge(src, 0));
         parents[src] = src;
 
         while (queue.size() > 0)
@@ -59,7 +59,7 @@ public class DijsktraShortestPath
                         parents[i] = s;
                     }
 
-                    queue.add(new Node(i, weights[i]));
+                    queue.add(new Edge(i, weights[i]));
                 }
             }
         }
@@ -95,9 +95,9 @@ public class DijsktraShortestPath
     static void calculate(int[][] graph, int src, int v, int[] weights, int[] parents)
     {
         var visited = new boolean[v];
-        var queue = new PriorityQueue<Node>(new NodeComparator());
+        var queue = new PriorityQueue<Edge>(new NodeComparator());
 
-        queue.add(new Node(src, 0));
+        queue.add(new Edge(src, 0));
         parents[src] = src;
 
         while (queue.size() > 0)
@@ -118,18 +118,18 @@ public class DijsktraShortestPath
                         parents[i] = s;
                     }
 
-                    queue.add(new Node(i, weights[i]));
+                    queue.add(new Edge(i, weights[i]));
                 }
             }
         }
     }
 
-    static void calculate(List<Node>[] graph, int src, int v, int[] weights, int[] parents)
+    static void calculate(List<Edge>[] graph, int src, int v, int[] weights, int[] parents)
     {
         var visited = new boolean[v];
-        var queue = new PriorityQueue<Node>(new NodeComparator());
+        var queue = new PriorityQueue<Edge>(new NodeComparator());
 
-        queue.add(new Node(src, 0));
+        queue.add(new Edge(src, 0));
         parents[src] = src;
 
         while (queue.size() > 0)
@@ -141,16 +141,16 @@ public class DijsktraShortestPath
 
             for (int i = 0; i < graph[s].size(); i++)
             {
-                var e = graph[s].get(i);
-                if (!visited[e.index])
+                var edge = graph[s].get(i);
+                if (!visited[edge.index])
                 {
-                    if (weights[e.index] > weights[s] + e.weight)
+                    if (weights[edge.index] > weights[s] + edge.weight)
                     {
-                        weights[e.index] = weights[s] + e.weight;
-                        parents[e.index] = s;
+                        weights[edge.index] = weights[s] + edge.weight;
+                        parents[edge.index] = s;
                     }
 
-                    queue.add(new Node(e.index, weights[s]));
+                    queue.add(new Edge(edge.index, weights[s]));
                 }
             }
         }
@@ -171,22 +171,22 @@ public class DijsktraShortestPath
         return path.stream().toList();
     }
 
-    public static class Node
+    public static class Edge
     {
         public int weight;
 
         public int index;
 
-        public Node(int index, int weight)
+        public Edge(int index, int weight)
         {
             this.index = index;
             this.weight = weight;
         }
     }
 
-    public static class NodeComparator implements Comparator<Node>{
+    public static class NodeComparator implements Comparator<Edge>{
         @Override
-        public int compare(Node o1, Node o2) {
+        public int compare(Edge o1, Edge o2) {
             return o1.weight-o2.weight;
         }
     }

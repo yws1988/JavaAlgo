@@ -71,4 +71,30 @@ public class ArrayHelper{
         }
     }
 
+    /***
+     * return the index of the first value which is greater or equal than specified key
+     * @param arr sorted array
+     * @param greaterOrEqualValue the key
+     * @return
+     */
+    public static int binarySearch(long[] arr, long greaterOrEqualValue){
+        int size = arr.length;
+        int low = 0;
+        int high = size-1;
+
+        while (low <= high) {
+            int mid = (low + high) >> 1;
+            long midVal = arr[mid];
+
+            if (midVal < greaterOrEqualValue)
+                low = mid + 1;
+            else if (midVal > greaterOrEqualValue)
+                high = mid - 1;
+            else
+                return mid; // key found
+        }
+
+        return low == size ? -1 : low;  // key not found.
+    }
+
 }
