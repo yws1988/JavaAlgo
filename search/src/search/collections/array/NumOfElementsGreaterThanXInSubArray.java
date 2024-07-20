@@ -13,11 +13,7 @@ Returns 2
 
 import datastructures.trees.SegmentTreeList;
 import utils.CollectionHelper;
-import utils.graph.GraphBuilder;
 
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class NumOfElementsGreaterThanXInSubArray {
@@ -29,29 +25,6 @@ public class NumOfElementsGreaterThanXInSubArray {
         int n = array.length;
 
         SegmentTreeList segmentTreeList = new SegmentTreeList(array, CollectionHelper::mergeTwoOrderedLists);
-        segmentTreeList.value(left, right, )
-    }
-
-    static int searchFunction(List<Integer> list, long min, long max)
-    {
-        int tdy = tree[idx].BinarySearch(max);
-        if (tdy < 0)
-        {
-            tdy = ~tdy - 1;
-        }
-        else
-        {
-            tdy--;
-        }
-
-        if (tdy < 0) return 0;
-
-        int tdx = tree[idx].BinarySearch(min);
-        if (tdx < 0)
-        {
-            tdx = ~tdx;
-        }
-
-        return tdy - tdx + 1;
+        return segmentTreeList.value(left, right, min, max);
     }
 }

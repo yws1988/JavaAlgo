@@ -2,6 +2,7 @@ package datastructures.trees;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -39,13 +40,13 @@ public class SegmentTreeList {
     }
 
     // qt:query start. qe:query end
-    public List<Integer> value(int qs, int qe) {
-        return getValueUtil(qs, qe, 0, sizeOfArray - 1, 0);
+    public Integer value(int qs, int qe, int min, int max) {
+        return getValueUtil(qs, qe, 0, sizeOfArray - 1, 0, min, max);
     }
 
-    Integer getValueUtil(int qs, int qe, int s, int e, int idx, BiFunction<Integer, Integer, Integer> conditionFun) {
+    Integer getValueUtil(int qs, int qe, int s, int e, int idx, int min, int max) {
         if (qs <= s && qe >= e) {
-            return conditionFun.apply(tree[idx];
+//            return searchFunction(tree[idx], min, max);
         }
 
         if (qe < s || qs > e) {
@@ -54,6 +55,8 @@ public class SegmentTreeList {
 
         int mid = mid(s, e);
 
-        return getValueUtil(qs, qe, s, mid, idx * 2 + 1) + getValueUtil(qs, qe, mid + 1, e, idx * 2 + 2);
+        return getValueUtil(qs, qe, s, mid, idx * 2 + 1, min, max) + getValueUtil(qs, qe, mid + 1, e, idx * 2 + 2, min, max);
     }
+
+
 }

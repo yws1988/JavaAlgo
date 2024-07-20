@@ -51,7 +51,7 @@ public class ShortestPathToDestinationThroughOnePoint {
 
         var costOfAllPoints = pairs.stream().map(p -> p.cost).collect(Collectors.toList());
 
-        int indexOfX = CollectionHelper.binarySearch(costOfAllPoints, x);
+        int indexOfX = CollectionHelper.binarySearchLeftElement(costOfAllPoints, x);
 
         if (indexOfX == -1) {
             return 0;

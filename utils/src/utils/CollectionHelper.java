@@ -72,29 +72,59 @@ public class CollectionHelper {
         return result;
     }
 
+    public static <T> int binarySearchLeftElement(List<? extends Comparable<? super T>> list, T key, int low, int high) {
+
+        while (low <= high) {
+            int mid = (low + high) >>> 1;
+            Comparable<? super T> midVal = list.get(mid);
+            int cmp = midVal.compareTo(key);
+
+            if (cmp < 0)
+                low = mid + 1;
+            else if (cmp > 0)
+                high = mid - 1;
+            else
+                return mid; // key found
+        }
+
+        return -(low + 1);  // key not found
+    }
+
     /***
      * return the index of the first value which is greater or equal than specified key
      * @param list sorted array
      * @param greaterOrEqualValue the key
      * @return
      */
-    public static int binarySearch(List<Long> list, long greaterOrEqualValue){
-        int size = list.size();
-        int low = 0;
-        int high = size-1;
+    public static <T> int binarySearchLeftElement(List<? extends Comparable<? super T>> list, T greaterOrEqualValue){
+        int index = binarySearchLeftElement(list, greaterOrEqualValue, 0, list.size()-1);
 
-        while (low <= high) {
-            int mid = (low + high) >> 1;
-            long midVal = list.get(mid);
-
-            if (midVal < greaterOrEqualValue)
-                low = mid + 1;
-            else if (midVal > greaterOrEqualValue)
-                high = mid - 1;
-            else
-                return mid; // key found
+        if(index<0){
+            return -index-1;
         }
 
-        return low == size ? -1 : low;  // key not found.
+        while(index>=0){
+            index = binarySearchLeftElement(list, greaterOrEqualValue, 0, index-1);
+        }
+
+        return -index-1;
+    }
+
+
+
+    /***
+     * Returns the num of elements whose value>=min and value<=max
+     * @param sortedList
+     * @param min
+     * @param max
+     * @return
+     */
+
+    public static int binarySearchNumElementsBetweenMinAndMax(List<Integer> sortedList, int min, int max)
+    {
+        int tdy = binarySearchLeftElement(sortedList, max+1);
+        int tdx = binarySearchLeftElement(sortedList, min);
+
+        return tdy - tdx;
     }
 }
