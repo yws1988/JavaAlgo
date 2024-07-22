@@ -145,4 +145,36 @@ public class GraphHelper {
 
         return new Pair(idx, max);
     }
+
+    /***
+     * Calculate all the points whose distance is greater than the point i
+     * The result is ins[i] and outs[i]
+     * @param graph
+     */
+    public static void calculateInOutDistanceOfPoints(List<Integer>[] graph){
+        int n = graph.length;
+        int[] ins = new int[n];
+        int[] outs = new int[n];
+        boolean[] vs = new boolean[n];
+
+        getDistanceInOutWithDFS(graph, 0, vs, ins, outs);
+    }
+
+    public static int distance = 0;
+
+    public static void getDistanceInOutWithDFS(List<Integer>[] graph, int src, boolean[] vs, int[] ins, int[] outs)
+    {
+        vs[src] = true;
+        ins[src] = distance++;
+
+        for (int child : graph[src])
+        {
+            if (!vs[child])
+            {
+                getDistanceInOutWithDFS(graph, child, vs, ins, outs);
+            }
+        }
+
+        outs[src] = distance-1;
+    }
 }

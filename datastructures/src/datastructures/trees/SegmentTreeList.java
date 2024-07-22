@@ -1,5 +1,7 @@
 package datastructures.trees;
 
+import utils.CollectionHelper;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -46,7 +48,7 @@ public class SegmentTreeList {
 
     Integer getValueUtil(int qs, int qe, int s, int e, int idx, int min, int max) {
         if (qs <= s && qe >= e) {
-//            return searchFunction(tree[idx], min, max);
+            return CollectionHelper.binarySearchNumElementsBetweenMinAndMax(tree[idx], min, max);
         }
 
         if (qe < s || qs > e) {
