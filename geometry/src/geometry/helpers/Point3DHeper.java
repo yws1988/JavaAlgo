@@ -43,4 +43,9 @@ public class Point3DHeper
 
         return new Point3DDouble(x1, y1, z1);
     }
+
+    public static double distance(Point3DDouble point1, Point3DDouble point2)
+    {
+        return Math.sqrt(Math.pow(point1.x - point2.x, 2) + Math.pow(point1.y - point2.y, 2) + Math.pow(point1.z - point2.z, 2));
+    }
 }

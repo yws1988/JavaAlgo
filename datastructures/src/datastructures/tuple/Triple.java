@@ -1,8 +1,6 @@
 package datastructures.tuple;
 
-import java.util.Comparator;
-
-public class Triple{
+public class Triple implements Comparable<Triple>{
     public int x;
     public int y;
     public int z;
@@ -13,10 +11,8 @@ public class Triple{
         this.z = z;
     }
 
-    public static class TripleComparator implements Comparator<Triple> {
-        @Override
-        public int compare(Triple o1, Triple o2) {
-            return o1.z-o2.z;
-        }
+    @Override
+    public int compareTo(Triple o) {
+        return this.z-o.z;
     }
 }
