@@ -1,11 +1,6 @@
 package graph.path;
 
 import datastructures.graph.EdgeWithWeight;
-import datastructures.tuple.Triple;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.PriorityQueue;
 
 /*
 You are given a weighted directed graph some of whose vertices are marked as special vertices.
@@ -29,12 +24,15 @@ the source 1 and destination 4.
 The lowest cost is 2.
  */
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.PriorityQueue;
+
 public class MinimumCostOfValidPath {
     public static int getMinimumCost(int src, int des, List<EdgeWithWeight>[] graph, boolean[] specialVertice)
     {
         PriorityQueue<Node> queue = new PriorityQueue<Node>();
-        HashSet<Triple> set = new HashSet<Triple>();
-        set.add(new Triple(1, 2, 3));
+        HashSet<Step> set = new HashSet<>();
 
         queue.add(new Node(src, 0, 0, specialVertice[src]));
 
@@ -43,34 +41,34 @@ public class MinimumCostOfValidPath {
             var node = queue.poll();
             int s = node.src;
 
-            if (s == des && node.isSpecialVertice)
+            if (s == des && node.containsSpecialVertice)
             {
-                return node.toWeight;
+                return node.totalWeight;
             }
 
+            set.add(new Step(s, node.totalWeight, node.containsSpecialVertice));
             int fromWeight = node.fromWeight;
-            set.add(new Triple(s, fromWeight, csp));
 
-            for (int i = 0; i < es[s].Count; i++)
+            for (int i = 0; i < graph[s].size(); i++)
             {
-                var des = es[s][i].d;
-                var nw = es[s][i].w;
+                int desVertice = graph[s].get(i).des;
+                var currentWeight = graph[s].get(i).weight;
 
-                if (fromWeight > 0 && (fromWeight * 0.5 > nw || fromWeight * 2 < nw)) continue;
-                if (csp == 1 && sp[des] == 1) continue;
+                if (fromWeight > 0 && (fromWeight * 0.5 > currentWeight || fromWeight * 2 < currentWeight)) continue;
+                if (specialVertice[s] && specialVertice[desVertice]) continue;
 
-                if (csp == 1 || sp[des] == 1)
+                if (specialVertice[s] || specialVertice[desVertice])
                 {
-                    if (!set.Contains(new ValueTuple<int,int,int>(des, nw, 1)))
+                    if (!set.contains(new Step(desVertice, node.totalWeight + currentWeight, true)))
                     {
-                        queue.Enqueue(new Node(des, nw, node.toWeight + nw, 1));
+                        queue.add(new Node(desVertice, currentWeight, node.totalWeight + currentWeight, true));
                     }
                 }
                 else
                 {
-                    if (!set.Contains(new ValueTuple<int, int, int>(des, nw, 0)))
+                    if (!set.contains(new Step(desVertice, node.totalWeight + currentWeight, false)))
                     {
-                        queue.Enqueue(new Node(des, nw, node.toWeight + nw, 0));
+                        queue.add(new Node(desVertice, currentWeight, node.totalWeight + currentWeight, false));
                     }
                 }
             }
@@ -83,19 +81,31 @@ public class MinimumCostOfValidPath {
     {
         public int src;
         public int fromWeight;
-        public int toWeight;
-        public boolean isSpecialVertice;
+        public int totalWeight;
+        public boolean containsSpecialVertice;
 
-        public Node(int src, int cw, int tw, boolean isSpecialVertice) {
+        public Node(int src, int fromWeight, int totalWeight, boolean containsSpecialVertice) {
             this.src = src;
-            this.fromWeight = cw;
-            this.toWeight = tw;
-            this.isSpecialVertice = isSpecialVertice;
+            this.fromWeight = fromWeight;
+            this.totalWeight = totalWeight;
+            this.containsSpecialVertice = containsSpecialVertice;
         }
 
         @Override
         public int compareTo(Node o) {
-            return this.toWeight -o.toWeight;
+            return this.totalWeight -o.totalWeight;
+        }
+    }
+
+    public static class Step {
+        public int src;
+        public int totalWeight;
+        public boolean containsSpecialVertice;
+
+        public Step(int src, int totalWeight, boolean containsSpecialVertice) {
+            this.src = src;
+            this.totalWeight = totalWeight;
+            this.containsSpecialVertice = containsSpecialVertice;
         }
     }
 }
