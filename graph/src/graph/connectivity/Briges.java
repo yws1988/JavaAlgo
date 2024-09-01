@@ -7,7 +7,7 @@ public class Briges
 {
     public static int step;
 
-    public static List<Edge> GetAllBriges(List<Integer>[] graph)
+    public static List<Edge> getAllBriges(List<Integer>[] graph)
     {
         var briges = new ArrayList<Edge>();
         step = 0;
@@ -65,5 +65,6 @@ public class Briges
             Src = s;
             Des = d;
         }
+
     }
 }
