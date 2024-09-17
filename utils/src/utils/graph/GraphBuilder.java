@@ -1,5 +1,7 @@
 package utils.graph;
 
+import datastructures.graph.EdgeWithWeight;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -35,6 +37,30 @@ public class GraphBuilder
             if (!isDirected)
             {
                 graph[des].add(src);
+            }
+        }
+
+        return graph;
+    }
+
+    public static List<EdgeWithWeight>[] buildListArrayWithWeight(int n, int[][] arr, boolean isDirected)
+    {
+        var graph = new ArrayList[n];
+
+        for (int i = 0; i < n; i++) {
+            graph[i] = new ArrayList<EdgeWithWeight>();
+        }
+
+        for (var item : arr)
+        {
+            int src = item[0];
+            int des = item[1];
+            int weight = item[2];
+            graph[src].add(new EdgeWithWeight(src, des, weight));
+
+            if (!isDirected)
+            {
+                graph[des].add(new EdgeWithWeight(des, src, weight));
             }
         }
 
