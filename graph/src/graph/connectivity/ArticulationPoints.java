@@ -82,53 +82,54 @@ public class ArticulationPoints
     {
         Stack<Integer> stack = new Stack<Integer>();
         stack.push(root);
+        int child = 0;
 
         while (stack.size() > 0)
         {
-            var p = stack.peek();
+            var node = stack.peek();
 
-            if (!visited[p])
-            {
-                visited[p] = true;
-                dist[p] = ++step;
-                low[p] = step;
+            if(!visited[node]){
+                visited[node] = true;
+                dist[node] = ++step;
+                low[node] = step;
             }
 
             boolean isPop = true;
-
-            for (var c : graph[p])
+            for (var childNode : graph[node])
             {
-                if (!visited[c])
-                {
+                if(!visited[childNode]){
+                    parents[childNode]=node;
+                    stack.push(childNode);
                     isPop = false;
-                    stack.push(c);
-                    parents[c] = p;
+                    break;
                 }
             }
 
             if (isPop)
             {
-                p = stack.pop();
-                int child = 0;
-                for (var c : graph[p])
+                node = stack.pop();
+                for (var childNode : graph[node])
                 {
-                    if (c!=parents[c])
-                    {
-                        child++;
-                        low[p] = Math.min(dist[c], low[p]);
+                    if(childNode!=parents[node]){
+                        low[node] = Math.min(dist[childNode], low[node]);
                     }
                 }
 
-                if(p == root && child > 1)
-                {
-                    isArticulationPoints[p] = true;
+                if(node!=root){
+                    int parentNode = parents[node];
+                    low[parentNode]=Math.min(low[parentNode], low[node]);
                 }
 
-                if(p != root && child > 0 && low[p]>=dist[p])
-                {
-                    isArticulationPoints[p] = true;
+                if(parents[node] == root){
+                    child++;
+                }else if(node!=root && low[node]>=dist[parents[node]]){
+                    isArticulationPoints[parents[node]]=true;
                 }
             }
+        }
+
+        if(child>1){
+            isArticulationPoints[root]=true;
         }
     }
 

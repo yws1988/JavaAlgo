@@ -65,18 +65,19 @@ public class ConnectedGraphBuilder
      * the same component, if the edge weight is 0, the two edge vertex belongs to different component
      * transform the graph into a new connected component graph
      */
+    public static int[] connectedComponents;
 
-    public static HashSet<Integer>[] getComponentGraph(List<EdgeWithWeight>[] graph, int[] components)
+    public static HashSet<Integer>[] transformToConnectedComponentGraph(List<EdgeWithWeight>[] graph)
     {
         int v = graph.length;
         boolean[] vs = new boolean[v];
-        Arrays.fill(components, -1);
+        Arrays.fill(connectedComponents, -1);
 
         int componentId = 0;
 
         for (int i = 0; i < v; i++) {
             if(!vs[i]){
-                bfs(graph, i, components, componentId, vs);
+                bfs(graph, i, connectedComponents, componentId, vs);
                 componentId++;
             }
         }
@@ -89,8 +90,8 @@ public class ConnectedGraphBuilder
 
         for (int i = 0; i < v; i++) {
             for (var edge : graph[i]) {
-                if(components[i]!=components[edge.des]){
-                    newGraph[components[i]].add(components[edge.des]);
+                if(connectedComponents[i]!= connectedComponents[edge.des]){
+                    newGraph[connectedComponents[i]].add(connectedComponents[edge.des]);
                 }
             }
         }
@@ -100,8 +101,6 @@ public class ConnectedGraphBuilder
 
     public static void bfs(List<EdgeWithWeight>[] graph, int src, int[] components, int componentId, boolean[] vs)
     {
-
-
         var queue = new LinkedList<Integer>();
         queue.add(src);
 
@@ -126,7 +125,7 @@ public class ConnectedGraphBuilder
      * transform the graph into a new connected component graph
      */
 
-    public static HashSet<Integer>[] getComponentGraphWithComponentsIds(List<Integer>[] graph, int[] components)
+    public static HashSet<Integer>[] transformComponentGraphWithComponentsIds(List<Integer>[] graph, int[] components)
     {
         int numOfComponents = Arrays.stream(components).max().getAsInt()+1;
 

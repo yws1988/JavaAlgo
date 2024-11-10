@@ -1,9 +1,7 @@
 package utils;
 
 import java.io.File;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
 
 public class Template
 {
@@ -62,6 +60,25 @@ public class Template
         @Override
         public int compare(Pair o1, Pair o2) {
             return o1.x-o2.x;
+        }
+    }
+
+    public static void printEdgeList(HashSet<Integer>[] biComponentGraph){
+        HashSet<List> edges = new HashSet<>();
+        List<Integer> edge;
+        for (int i = 0; i < biComponentGraph.length; i++) {
+            for (int j : biComponentGraph[i]) {
+                if(i>j){
+                    edge = List.of(j, i);
+                }else{
+                    edge = List.of(i, j);
+                }
+
+                if(!edges.contains(edge)){
+                    edges.add(edge);
+                    System.out.println(edge.get(0)+"-"+edge.get(1));
+                }
+            }
         }
     }
 }
