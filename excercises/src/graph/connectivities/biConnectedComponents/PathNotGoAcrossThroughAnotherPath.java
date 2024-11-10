@@ -14,6 +14,27 @@ Then q lines follow.
 The i-th of them contains four integers ai, bi, ci, di
 Output format
 For each query print Yes if it's possible to delete some black edges and satisfy the condition. Print No otherwise.
+
+Example:
+5 6 4
+1 2 0
+1 2 0
+2 3 1
+1 3 0
+3 4 0
+4 5 0
+1 2 4 5
+2 5 1 4
+2 5 3 4
+1 1 2 2
+
+Output:
+
+Yes
+Yes
+No
+No
+
  */
 
 import datastructures.graph.EdgeWithWeight;
