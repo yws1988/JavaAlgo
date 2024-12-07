@@ -13,7 +13,7 @@ public class LowestCommonAncestorWithDpSolution
     static int[][] dp;
     static int[] depth;
 
-    public static void buildLcaDpLevel(Collection<Integer>[] treeP, int root)
+    public static void preprocessLcaDpLevel(Collection<Integer>[] treeP, int root)
     {
         tree = treeP;
         n = tree.length;
@@ -30,10 +30,20 @@ public class LowestCommonAncestorWithDpSolution
         boolean[] vs = new boolean[n];
         depth = new int[n];
         dfs(root, -1, 0, vs);
-        calDp();
+
+        for (int j = 1; j < level; j++)
+        {
+            for (int i = 1; i < n; i++)
+            {
+                if (dp[i][j - 1] != -1)
+                {
+                    dp[i][j] = dp[dp[i][j - 1]][j - 1];
+                }
+            }
+        }
     }
 
-    public static int Lca(int u, int v)
+    public static int lca(int u, int v)
     {
         if (depth[u] > depth[v])
         {
@@ -77,20 +87,6 @@ public class LowestCommonAncestorWithDpSolution
             if (!vs[child])
             {
                 dfs(child, node, level+1, vs);
-            }
-        }
-    }
-
-    private static void calDp()
-    {
-        for (int j = 1; j < level; j++)
-        {
-            for (int i = 1; i < n; i++)
-            {
-                if (dp[i][j - 1] != -1)
-                {
-                    dp[i][j] = dp[dp[i][j - 1]][j - 1];
-                }
             }
         }
     }

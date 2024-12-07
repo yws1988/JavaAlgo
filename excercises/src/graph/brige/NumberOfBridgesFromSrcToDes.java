@@ -41,8 +41,8 @@ public class NumberOfBridgesFromSrcToDes
         var sets = new HashSet<List>();
 
         for (var edge : briges) {
-            sets.add(List.of(edge.Src, edge.Des));
-            sets.add(List.of(edge.Des, edge.Src));
+            sets.add(List.of(edge.src, edge.des));
+            sets.add(List.of(edge.des, edge.src));
         }
 
         var queue = new LinkedList<datastructures.tuple.Pair>();

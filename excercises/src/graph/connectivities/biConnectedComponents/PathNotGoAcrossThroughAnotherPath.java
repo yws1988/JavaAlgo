@@ -49,7 +49,7 @@ import java.util.*;
 import static graph.connectivity.BiConnected.ArticulationPointComponentId;
 import static graph.connectivity.BiConnected.biConnectedComponents;
 import static graph.connectivity.ConnectedGraphBuilder.connectedComponents;
-import static graph.tree.binarytree.LowestCommonAncestorWithDpSolution.Lca;
+import static graph.tree.binarytree.LowestCommonAncestorWithDpSolution.lca;
 
 public class PathNotGoAcrossThroughAnotherPath
 {
@@ -66,7 +66,7 @@ public class PathNotGoAcrossThroughAnotherPath
         HashSet<Integer>[] componentGraph = ConnectedGraphBuilder.transformToConnectedComponentGraph(graph);
         HashSet<Integer>[] biComponentGraph = BiConnected.getBiConnectedComponentGraph(componentGraph);
 
-        LowestCommonAncestorWithDpSolution.buildLcaDpLevel(biComponentGraph, 0);
+        LowestCommonAncestorWithDpSolution.preprocessLcaDpLevel(biComponentGraph, 0);
 
         for (int i = 0; i < q; i++) {
             var points = readIntArray();
@@ -84,7 +84,7 @@ public class PathNotGoAcrossThroughAnotherPath
                 continue;
             }
 
-            int ancestorAB = Lca(biComponentA, biComponentB);
+            int ancestorAB = lca(biComponentA, biComponentB);
 
             if(biComponentC >= ArticulationPointComponentId && biComponentD >= ArticulationPointComponentId){
               if(isPointInPath(biComponentA, biComponentB, biComponentC, ancestorAB) && isPointInPath(biComponentA, biComponentB, biComponentD, ancestorAB)){
@@ -98,7 +98,7 @@ public class PathNotGoAcrossThroughAnotherPath
     }
 
     static boolean isPointInPath(int a, int b, int x, int ancestor){
-        return (Lca(a, x)==x || Lca(b, x)==x) && (Lca(x, ancestor)==ancestor);
+        return (lca(a, x)==x || lca(b, x)==x) && (lca(x, ancestor)==ancestor);
     }
 
     public static Scanner scanner;

@@ -14,9 +14,11 @@ public class Template
     {
     }
 
+
+
     public static Scanner scanner;
 
-    public static void mainf( String[] argv ) throws Exception
+    public static void main( String[] argv ) throws Exception
     {
         if(true){
             File file = new File("D:\\Algo\\JavaAlgo\\excercises\\src\\resources\\test.txt");

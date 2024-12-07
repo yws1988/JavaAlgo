@@ -146,15 +146,14 @@ public class BiConnected {
             listGraph[i] = new ArrayList(graph[i]);
         }
 
-        var edges = new Stack<Edge>();
-        DfsWithStack(edges, listGraph, visited, dist, low, parents);
+        DfsWithStack(listGraph, visited, dist, low, parents);
 
         return createBiComponentGraph();
     }
 
     static int root=0;
 
-    static void DfsWithStack(Stack<Edge> edges, List<Integer>[] graph, boolean[] visited, int[] dist, int[] low, int[] parents)
+    static void DfsWithStack(List<Integer>[] graph, boolean[] visited, int[] dist, int[] low, int[] parents)
     {
         Stack<Node> stackVertex = new Stack<Node>();
         stackVertex.push(new Node(0, 0));
@@ -185,7 +184,7 @@ public class BiConnected {
                     low[node] = Math.min(dist[childNode], low[node]);
                     isPop = false;
                     break;
-                }else if(parents[childNode]!=node){
+                }else if(parents[node]!=childNode){
                     if(dist[node]>dist[childNode]){
                         stackComponents.push(new Edge(node, childNode));
                     }

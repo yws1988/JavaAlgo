@@ -67,53 +67,56 @@ public class ArticulationPoints
         int[] parents = new int[v];
         int[] dist = new int[v];
         int[] low = new int[v];
-        boolean[] isArticulationPoints = new boolean[v];
+        boolean[] areArticulationPoints = new boolean[v];
         for (int i = 0; i < v; i++)
         {
             parents[i] = -1;
         }
 
-        DfsWithStack(0, graph, visited, dist, low, parents, isArticulationPoints);
+        DfsWithStack(0, graph, visited, dist, low, parents, areArticulationPoints);
 
-        return isArticulationPoints;
+        return areArticulationPoints;
     }
 
-    public static void DfsWithStack(int root, List<Integer>[] graph, boolean[] visited, int[] dist, int[] low, int[] parents, boolean[] isArticulationPoints)
+    static void DfsWithStack(int root, List<Integer>[] graph, boolean[] visited, int[] dist, int[] low, int[] parents, boolean[] areArticulationPoints)
     {
-        Stack<Integer> stack = new Stack<Integer>();
-        stack.push(root);
+        Stack<Node> stackVertex = new Stack<>();
+        stackVertex.push(new Node(root, 0));
+        visited[root] = true;
+        dist[root] = ++step;
+        low[root] = step;
         int child = 0;
 
-        while (stack.size() > 0)
+        while (stackVertex.size() > 0)
         {
-            var node = stack.peek();
-
-            if(!visited[node]){
-                visited[node] = true;
-                dist[node] = ++step;
-                low[node] = step;
-            }
+            var currentNode = stackVertex.peek();
+            var node = currentNode.node;
+            var childIndex = currentNode.childIndex;
 
             boolean isPop = true;
-            for (var childNode : graph[node])
-            {
+
+            for (int i = childIndex; i < graph[node].size(); i++) {
+                int childNode = graph[node].get(i);
+                currentNode.setChildIndex(i+1);
                 if(!visited[childNode]){
+                    visited[childNode] = true;
+                    dist[childNode] = ++step;
+                    low[childNode] = step;
+
                     parents[childNode]=node;
-                    stack.push(childNode);
+                    stackVertex.push(new Node(childNode, 0));
+                    low[node] = Math.min(dist[childNode], low[node]);
                     isPop = false;
                     break;
+                }else if(parents[node]!=childNode){
+                    low[node] = Math.min(dist[childNode], low[node]);
                 }
             }
 
             if (isPop)
             {
-                node = stack.pop();
-                for (var childNode : graph[node])
-                {
-                    if(childNode!=parents[node]){
-                        low[node] = Math.min(dist[childNode], low[node]);
-                    }
-                }
+                currentNode = stackVertex.pop();
+                node = currentNode.node;
 
                 if(node!=root){
                     int parentNode = parents[node];
@@ -122,14 +125,27 @@ public class ArticulationPoints
 
                 if(parents[node] == root){
                     child++;
+                    if(child>1){
+                        areArticulationPoints[root]=true;
+                    }
                 }else if(node!=root && low[node]>=dist[parents[node]]){
-                    isArticulationPoints[parents[node]]=true;
+                    areArticulationPoints[parents[node]]=true;
                 }
             }
         }
+    }
 
-        if(child>1){
-            isArticulationPoints[root]=true;
+    public static class Node {
+        public int node;
+        public int childIndex;
+
+        public Node(int x, int y) {
+            this.node = x;
+            this.childIndex = y;
+        }
+
+        public void setChildIndex(int childIndex) {
+            this.childIndex = childIndex;
         }
     }
 
