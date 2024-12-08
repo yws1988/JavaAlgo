@@ -1,9 +1,31 @@
-package utils;
+package graph.brige;
+/*
+Given a directed connected graph with n vertices and m edges, each edge has a weight of cost w.
+If the path go through u to v the cost is 0, but v to u the cost is w.
+Before querying the cost of path from vertex u to v, we can modify the direction of any edges.
+Calculate the minimum total of the costs for all the queries.
+The first line contains two integers n, m — the number of vertices and the number of edges, respectively.
+Next m lines contain three integers u, v, w
+7 7
+4 6 7
+4 5 10
+5 7 3
+3 5 3
+1 2 5
+7 3 6
+2 6 1
+2
+6 5
+7 4
+
+Next line contains a single integer q — the number of queries.
+Next q lines contain two integers each, start and end vertice
+ */
 
 import java.io.*;
 import java.util.*;
 
-public class BridgeTreeWithMinimumCosts {
+public class BridgeTreeWithMinimumCostsModifyingDirection {
 
     static int N, M;
     static ArrayList<Integer> adj[];
@@ -220,28 +242,9 @@ public class BridgeTreeWithMinimumCosts {
         return dp[u][0];
     }
 
-    private static void dfs(int node, int parent, int level, boolean[] vs)
-    {
-        vs[node] = true;
-
-        depth[node] = level;
-
-        for (var child : tree[node])
-        {
-            if (!vs[child])
-            {
-                dfs(child, node, level+1, vs);
-            }
-        }
-    }
-
-
-
 
     public static int readInt() throws IOException { return Integer.parseInt(reader.readLine()); }
     public static int[] readIntArray() throws IOException { return Arrays.stream(readStringArray()).mapToInt(Integer::parseInt).toArray(); }
     public static String[] readStringArray() throws IOException { return reader.readLine().split("[ \t]"); }
     public static int[][] readIntMatrix(int numberOfRows) throws IOException { int[][] matrix = new int[numberOfRows][]; for (int i = 0; i < numberOfRows; i++){matrix[i] = readIntArray(); matrix[i][0]--;matrix[i][1]--;} return matrix; }
-
-
 }
