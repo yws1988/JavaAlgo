@@ -46,7 +46,7 @@ import utils.graph.GraphBuilder;
 import java.io.File;
 import java.util.*;
 
-import static graph.connectivity.BiConnected.ArticulationPointComponentId;
+import static graph.connectivity.BiConnected.articulationPointComponentId;
 import static graph.connectivity.BiConnected.biConnectedComponents;
 import static graph.connectivity.ConnectedGraphBuilder.connectedComponents;
 import static graph.tree.binarytree.LowestCommonAncestorWithDpSolution.lca;
@@ -64,7 +64,7 @@ public class PathNotGoAcrossThroughAnotherPath
         List<EdgeWithWeight>[] graph = GraphBuilder.buildListArrayWithWeight(n, tmp, false);
 
         HashSet<Integer>[] componentGraph = ConnectedGraphBuilder.transformToConnectedComponentGraph(graph);
-        HashSet<Integer>[] biComponentGraph = BiConnected.getBiConnectedComponentGraph(componentGraph);
+        HashSet<Integer>[] biComponentGraph = BiConnected.buildBiConnectedComponentGraph(componentGraph);
 
         LowestCommonAncestorWithDpSolution.preprocessLcaDpLevel(biComponentGraph, 0);
 
@@ -86,7 +86,7 @@ public class PathNotGoAcrossThroughAnotherPath
 
             int ancestorAB = lca(biComponentA, biComponentB);
 
-            if(biComponentC >= ArticulationPointComponentId && biComponentD >= ArticulationPointComponentId){
+            if(biComponentC >= articulationPointComponentId && biComponentD >= articulationPointComponentId){
               if(isPointInPath(biComponentA, biComponentB, biComponentC, ancestorAB) && isPointInPath(biComponentA, biComponentB, biComponentD, ancestorAB)){
                    System.out.println("No");
                     continue;

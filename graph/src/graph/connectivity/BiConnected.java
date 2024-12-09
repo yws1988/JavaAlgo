@@ -1,13 +1,14 @@
 package graph.connectivity;
 
-
 import java.util.*;
 
 public class BiConnected {
-    public static int Step;
+
+    /*** To verify if graph is bi connected graph ***/
+    static int step, root;
 
     public static boolean isGraphBiConnected(List<Integer>[] graph) {
-        Step = 0;
+        step = 0;
         int v = graph.length;
         boolean[] visited = new boolean[v];
         int[] parents = new int[v];
@@ -17,20 +18,20 @@ public class BiConnected {
             parents[i] = -1;
         }
 
-        return dfsComponents(0, graph, visited, dist, low, parents);
+        return dfsIsBiConnected(root, graph, visited, dist, low, parents);
     }
 
-    public static boolean dfsComponents(int s, List<Integer>[] graph, boolean[] vs, int[] dist, int[] low, int[] parents) {
+    public static boolean dfsIsBiConnected(int s, List<Integer>[] graph, boolean[] vs, int[] dist, int[] low, int[] parents) {
         vs[s] = true;
-        dist[s] = ++Step;
-        low[s] = Step;
+        dist[s] = ++step;
+        low[s] = step;
 
         int child = 0;
         for (var c : graph[s]) {
             if (!vs[c]) {
                 child++;
                 parents[c] = s;
-                if (!dfsComponents(c, graph, vs, dist, low, parents)) return false;
+                if (!dfsIsBiConnected(c, graph, vs, dist, low, parents)) return false;
                 low[s] = Math.min(low[c], low[s]);
                 if (parents[s] == -1 && child > 1) {
                     return false;
@@ -47,10 +48,13 @@ public class BiConnected {
         return true;
     }
 
-    static ArrayList<ArrayList<Edge>> BiConnectedCompenents = new ArrayList<ArrayList<Edge>>();
+    /*** Get all the bi connected components ***/
 
-    public static void getBiconnectedComponents(List<Integer>[] graph) {
-        Step = 0;
+    static Stack<Edge> edges = new Stack<>();
+    static ArrayList<ArrayList<Edge>> biConnectedComponentsList = new ArrayList<ArrayList<Edge>>();
+
+    public static void getBiConnectedComponents(Collection<Integer>[] graph) {
+        step = 0;
         int v = graph.length;
         boolean[] visited = new boolean[v];
         int[] parents = new int[v];
@@ -59,27 +63,14 @@ public class BiConnected {
         for (int i = 0; i < v; i++) {
             parents[i] = -1;
         }
-        var edges = new Stack<Edge>();
 
-        dfsComponents(edges, 0, graph, visited, dist, low, parents);
+        dfsBiConnectedComponents(root, graph, visited, dist, low, parents);
     }
 
-    public static void pushComponent(int s, int d, Stack<Edge> edges) {
-        ArrayList<Edge> biComponents = new ArrayList<>();
-
-        Edge edge;
-        do {
-            edge = edges.pop();
-            biComponents.add(edge);
-        } while (s != edge.src || d != edge.des);
-
-        BiConnectedCompenents.add(biComponents);
-    }
-
-    public static void dfsComponents(Stack<Edge> edges, int s, List<Integer>[] graph, boolean[] visited, int[] dist, int[] low, int[] parents) {
+    public static void dfsBiConnectedComponents(int s, Collection<Integer>[] graph, boolean[] visited, int[] dist, int[] low, int[] parents) {
         visited[s] = true;
-        dist[s] = ++Step;
-        low[s] = Step;
+        dist[s] = ++step;
+        low[s] = step;
 
         int child = 0;
         for (var c : graph[s]) {
@@ -87,14 +78,14 @@ public class BiConnected {
                 child++;
                 parents[c] = s;
                 edges.push(new Edge(s, c));
-                dfsComponents(edges, c, graph, visited, dist, low, parents);
+                dfsBiConnectedComponents(c, graph, visited, dist, low, parents);
                 low[s] = Math.min(low[c], low[s]);
                 if (parents[s] == -1 && child > 1) {
-                    pushComponent(s, c, edges);
+                    popComponentList(s, c);
                 }
 
                 if (parents[s] != -1 && low[c] >= dist[s]) {
-                    pushComponent(s, c, edges);
+                    popComponentList(s, c);
                 }
             } else if (parents[s] != c) {
                 if (dist[s] > dist[c]) {
@@ -106,25 +97,26 @@ public class BiConnected {
         }
     }
 
-    public static class Edge {
-        public int src;
-        public int des;
+    public static void popComponentList(int s, int d) {
+        ArrayList<Edge> biComponents = new ArrayList<>();
 
-        public Edge(int s, int d) {
-            src = s;
-            des = d;
-        }
+        Edge edge;
+        do {
+            edge = edges.pop();
+            biComponents.add(edge);
+        } while (s != edge.src || d != edge.des);
+
+        biConnectedComponentsList.add(biComponents);
     }
 
-    /*** Create a new graph with vertex represents BiConnectedComponent ***/
+    /* build BiConnectedComponentGraph */
 
-    public static int step;
+    static int totalComponent;
     public static boolean[] areArticulationPoints;
     public static HashMap<Integer, Set<Integer>> componentsByArticulationPoint = new HashMap<>();
-    public static Stack<Edge> stackComponents = new Stack<>();
     public static int[] biConnectedComponents;
 
-    public static HashSet<Integer>[] getBiConnectedComponentGraph(HashSet<Integer>[] graph)
+    public static HashSet<Integer>[] buildBiConnectedComponentGraph(Collection<Integer>[] graph)
     {
         step = 0;
         int v = graph.length;
@@ -140,99 +132,26 @@ public class BiConnected {
             biConnectedComponents[i]=-1;
         }
 
-        var listGraph = new ArrayList[graph.length];
-
-        for (int i = 0; i < graph.length; i++) {
-            listGraph[i] = new ArrayList(graph[i]);
+        dfsToBuildBiComponentGraph(root, graph, visited, dist, low, parents);
+        if(edges.size()>0){
+            assignComponentId(-1, root);
         }
-
-        DfsWithStack(listGraph, visited, dist, low, parents);
 
         return createBiComponentGraph();
     }
 
-    static int root=0;
-
-    static void DfsWithStack(List<Integer>[] graph, boolean[] visited, int[] dist, int[] low, int[] parents)
-    {
-        Stack<Node> stackVertex = new Stack<Node>();
-        stackVertex.push(new Node(0, 0));
-        visited[root] = true;
-        dist[root] = ++step;
-        low[root] = step;
-        int child = 0;
-
-        while (stackVertex.size() > 0)
-        {
-            var currentNode = stackVertex.peek();
-            var node = currentNode.node;
-            var childIndex = currentNode.childIndex;
-
-            boolean isPop = true;
-
-            for (int i = childIndex; i < graph[node].size(); i++) {
-                int childNode = graph[node].get(i);
-                currentNode.setChildIndex(i+1);
-                if(!visited[childNode]){
-                    visited[childNode] = true;
-                    dist[childNode] = ++step;
-                    low[childNode] = step;
-
-                    parents[childNode]=node;
-                    stackVertex.push(new Node(childNode, 0));
-                    stackComponents.push(new Edge(node, childNode));
-                    low[node] = Math.min(dist[childNode], low[node]);
-                    isPop = false;
-                    break;
-                }else if(parents[node]!=childNode){
-                    if(dist[node]>dist[childNode]){
-                        stackComponents.push(new Edge(node, childNode));
-                    }
-
-                    low[node] = Math.min(dist[childNode], low[node]);
-                }
-            }
-
-            if (isPop)
-            {
-                currentNode = stackVertex.pop();
-                node = currentNode.node;
-
-                if(node!=root){
-                    int parentNode = parents[node];
-                    low[parentNode]=Math.min(low[parentNode], low[node]);
-                }
-
-                if(parents[node] == root){
-                    child++;
-                    if(child>1){
-                        areArticulationPoints[root]=true;
-                        assignComponentId(root, node);
-                    }
-                }else if(node!=root && low[node]>=dist[parents[node]]){
-                    areArticulationPoints[parents[node]]=true;
-                    assignComponentId(parents[node], node);
-                }
-            }
-        }
-
-        if(stackComponents.size()>0){
-            assignComponentId(-1, root);
-        }
-    }
-
-    public static int ArticulationPointComponentId;
+    public static int articulationPointComponentId;
     static HashSet<Integer>[] createBiComponentGraph()
     {
-        ArticulationPointComponentId = componentId;
+        articulationPointComponentId = totalComponent;
 
         for (int i : componentsByArticulationPoint.keySet()) {
-            biConnectedComponents[i]=componentId++;
+            biConnectedComponents[i]= totalComponent++;
         }
 
-        var newGraph = new HashSet[componentId];
+        var newGraph = new HashSet[totalComponent];
 
-        for (int i = 0; i < componentId; i++) {
+        for (int i = 0; i < totalComponent; i++) {
             newGraph[i] = new HashSet();
         }
 
@@ -246,41 +165,69 @@ public class BiConnected {
         return newGraph;
     }
 
-    public static int componentId = 0;
+    public static void dfsToBuildBiComponentGraph(int s, Collection<Integer>[] graph, boolean[] visited, int[] dist, int[] low, int[] parents) {
+        visited[s] = true;
+        dist[s] = ++step;
+        low[s] = step;
+
+        int child = 0;
+        for (var c : graph[s]) {
+            if (!visited[c]) {
+                child++;
+                parents[c] = s;
+                edges.push(new Edge(s, c));
+                dfsToBuildBiComponentGraph(c, graph, visited, dist, low, parents);
+                low[s] = Math.min(low[c], low[s]);
+                if (parents[s] == -1 && child > 1) {
+                    areArticulationPoints[s]=true;
+                    assignComponentId(s, c);
+                }
+
+                if (parents[s] != -1 && low[c] >= dist[s]) {
+                    areArticulationPoints[s]=true;
+                    assignComponentId(s, c);
+                }
+            } else if (parents[s] != c) {
+                if (dist[s] > dist[c]) {
+                    edges.push(new Edge(s, c));
+                }
+
+                low[s] = Math.min(dist[c], low[s]);
+            }
+        }
+    }
+
     private static void assignComponentId(int src, int des){
         Edge edge = null;
         do{
-            edge = stackComponents.pop();
+            edge = edges.pop();
             assignComponentId(edge.des);
             assignComponentId(edge.src);
-        }while(stackComponents.size()>0 && (edge.src != src || edge.des != des));
+        }while(edges.size()>0 && (edge.src != src || edge.des != des));
 
-        componentId++;
+        totalComponent++;
     }
 
     private static void assignComponentId(int vertexId) {
-        biConnectedComponents[vertexId] = componentId;
+        biConnectedComponents[vertexId] = totalComponent;
 
         if(areArticulationPoints[vertexId]){
             if(!componentsByArticulationPoint.containsKey(vertexId)){
                 componentsByArticulationPoint.put(vertexId, new HashSet<>());
             }
 
-            componentsByArticulationPoint.get(vertexId).add(componentId);
+            componentsByArticulationPoint.get(vertexId).add(totalComponent);
         }
     }
 
-    public static class Node {
-        public int node;
-        public int childIndex;
 
-        public Node(int x, int y) {
-            this.node = x;
-            this.childIndex = y;
-        }
+    public static class Edge {
+        public int src;
+        public int des;
 
-        public void setChildIndex(int childIndex) {
-            this.childIndex = childIndex;
+        public Edge(int s, int d) {
+            src = s;
+            des = d;
         }
     }
 }
