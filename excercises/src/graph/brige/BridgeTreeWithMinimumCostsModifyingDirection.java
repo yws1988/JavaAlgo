@@ -41,7 +41,7 @@ public class BridgeTreeWithMinimumCostsModifyingDirection {
 
     public static BufferedReader reader;
 
-    public static void main(String args[]) throws IOException {
+    public static void mainF(String args[]) throws IOException {
         new Thread(null, new Runnable() {
             public void run() {
                 try {

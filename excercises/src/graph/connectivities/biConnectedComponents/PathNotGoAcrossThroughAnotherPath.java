@@ -43,7 +43,8 @@ import graph.connectivity.ConnectedGraphBuilder;
 import graph.tree.binarytree.LowestCommonAncestorWithDpSolution;
 import utils.graph.GraphBuilder;
 
-import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.*;
 
 import static graph.connectivity.BiConnected.articulationPointComponentId;
@@ -58,8 +59,19 @@ public class PathNotGoAcrossThroughAnotherPath
     public static String s;
     public static String[] ss;
 
-    public static void solve()
-    {
+    public static void solve() throws FileNotFoundException {
+        if(true){
+            FileReader file = new FileReader("D:\\Algo\\JavaAlgo\\excercises\\src\\resources\\test.txt");
+            scanner = new Scanner(file);
+        }else{
+            scanner = new Scanner(System.in);
+        }
+
+        ns = readIntArray();
+        n=ns[0];
+        m=ns[1];
+        q=ns[2];
+
         int[][] tmp = readIntMatrix(m);
         List<EdgeWithWeight>[] graph = GraphBuilder.buildListArrayWithWeight(n, tmp, false);
 
@@ -74,27 +86,71 @@ public class PathNotGoAcrossThroughAnotherPath
             int b = points[1]-1;
             int c = points[2]-1;
             int d = points[3]-1;
-            int biComponentA = biConnectedComponents[connectedComponents[a]];
-            int biComponentB = biConnectedComponents[connectedComponents[b]];
-            int biComponentC = biConnectedComponents[connectedComponents[c]];
-            int biComponentD = biConnectedComponents[connectedComponents[d]];
 
-            if(connectedComponents[c] == connectedComponents[d] || (connectedComponents[a]==connectedComponents[c] && connectedComponents[b]==connectedComponents[d]) || (connectedComponents[a]==connectedComponents[d] && connectedComponents[b]==connectedComponents[c])){
+            if(c==a || c==b){
+                c=-1;
+            }
+
+            if(d==a || d==b){
+                d=-1;
+            }
+
+            if(c==-1 && d==-1){
                 System.out.println("No");
                 continue;
             }
 
+            int cca = connectedComponents[a];
+            int ccb = connectedComponents[b];
+
+            int biComponentA = biConnectedComponents[cca];
+            int biComponentB = biConnectedComponents[ccb];
+
             int ancestorAB = lca(biComponentA, biComponentB);
 
-            if(biComponentC >= articulationPointComponentId && biComponentD >= articulationPointComponentId){
-              if(isPointInPath(biComponentA, biComponentB, biComponentC, ancestorAB) && isPointInPath(biComponentA, biComponentB, biComponentD, ancestorAB)){
-                   System.out.println("No");
+            if(c!=-1 && d!=-1){
+                int ccc = connectedComponents[c];
+                int ccd = connectedComponents[d];
+
+                if(ccc == ccd || (cca==ccc && ccb==ccd) || (cca==ccd && ccb==ccc))
+                {
+                    System.out.println("No");
                     continue;
+                }
+
+                int biComponentC = biConnectedComponents[ccc];
+                int biComponentD = biConnectedComponents[ccd];
+
+                if(biComponentC >= articulationPointComponentId && biComponentD >= articulationPointComponentId){
+                    if(isPointInPath(biComponentA, biComponentB, biComponentC, ancestorAB) && isPointInPath(biComponentA, biComponentB, biComponentD, ancestorAB)){
+                        System.out.println("No");
+                        continue;
+                    }
+                }
+            }else{
+                int e= c!=-1 ? c : d;
+                int cce = connectedComponents[e];
+
+                if(cca==cce || ccb==cce)
+                {
+                    System.out.println("No");
+                    continue;
+                }
+
+                int biComponentE = biConnectedComponents[cce];
+
+                if(biComponentE >= articulationPointComponentId){
+                    if(isPointInPath(biComponentA, biComponentB, biComponentE, ancestorAB)){
+                        System.out.println("No");
+                        continue;
+                    }
                 }
             }
 
             System.out.println("Yes");
         }
+
+        scanner.close();
     }
 
     static boolean isPointInPath(int a, int b, int x, int ancestor){
@@ -105,20 +161,16 @@ public class PathNotGoAcrossThroughAnotherPath
 
     public static void mainF(String[] argv) throws Exception
     {
-        if(true){
-            File file = new File("C:\\Users\\shen\\Desktop\\delete\\input.txt");
-            scanner = new Scanner(file);
-        }else{
-            scanner = new Scanner(System.in);
-        }
+        new Thread(null, new Runnable() {
+            public void run() {
+                try {
+                    solve();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "1", 1 << 26).start();
 
-        ns = readIntArray();
-        n=ns[0];
-        m=ns[1];
-        q=ns[2];
-
-        solve();
-        scanner.close();
     }
 
     public static int[] readIntArray() { return Arrays.stream(readStringArray()).mapToInt(s->Integer.parseInt(s)).toArray(); }
