@@ -1,6 +1,7 @@
 package utils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class Template
@@ -10,16 +11,7 @@ public class Template
     public static String s;
     public static String[] ss;
 
-    public static void solve()
-    {
-    }
-
-
-
-    public static Scanner scanner;
-
-    public static void main( String[] argv ) throws Exception
-    {
+    public static void solve() throws FileNotFoundException {
         if(true){
             File file = new File("D:\\Algo\\JavaAlgo\\excercises\\src\\resources\\test.txt");
             scanner = new Scanner(file);
@@ -35,6 +27,23 @@ public class Template
 
         solve();
         scanner.close();
+    }
+
+
+
+    public static Scanner scanner;
+
+    public static void main( String[] argv ) throws Exception
+    {
+        new Thread(null, new Runnable() {
+            public void run() {
+                try {
+                    solve();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, "1", 1 << 26).start();
     }
 
     public static int readInt() { int tmp = scanner.nextInt(); scanner.nextLine(); return tmp;}

@@ -2,9 +2,7 @@ package utils.graph;
 
 import datastructures.graph.EdgeWithWeight;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 
 public class GraphBuilder
@@ -65,6 +63,26 @@ public class GraphBuilder
         }
 
         return graph;
+    }
+
+    public static HashMap<List, Integer> buildSetEdgesWithWeight(int[][] arr, boolean isDirected)
+    {
+        var edgesMap = new HashMap<List, Integer>();
+
+        for (var item : arr)
+        {
+            int src = item[0];
+            int des = item[1];
+            int weight = item[2];
+            edgesMap.put(List.of(src, des), weight);
+
+            if (!isDirected)
+            {
+                edgesMap.put(List.of(des, src), weight);
+            }
+        }
+
+        return edgesMap;
     }
 
     public static List<ArrayList<Integer>> buildListList(int n)

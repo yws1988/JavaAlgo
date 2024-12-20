@@ -51,7 +51,7 @@ public class BiConnected {
     /*** Get all the bi connected components ***/
 
     static Stack<Edge> edges = new Stack<>();
-    static ArrayList<ArrayList<Edge>> biConnectedComponentsList = new ArrayList<ArrayList<Edge>>();
+    public static ArrayList<ArrayList<Edge>> biConnectedComponentsList = new ArrayList<ArrayList<Edge>>();
 
     public static void getBiConnectedComponents(Collection<Integer>[] graph) {
         step = 0;
@@ -65,6 +65,10 @@ public class BiConnected {
         }
 
         dfsBiConnectedComponents(root, graph, visited, dist, low, parents);
+
+        if(edges.size()>0){
+            biConnectedComponentsList.add(new ArrayList<>(edges));
+        }
     }
 
     public static void dfsBiConnectedComponents(int s, Collection<Integer>[] graph, boolean[] visited, int[] dist, int[] low, int[] parents) {
