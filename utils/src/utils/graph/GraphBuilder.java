@@ -112,4 +112,36 @@ public class GraphBuilder
     {
         return IntStream.rangeClosed(0, n).boxed().map(s -> new HashSet<Integer>()).toList();
     }
+
+    /***
+     * Build graph List<Integer>[], index i is vertex id, value is the index of edges
+     * there are m edges, each edge presents three integers by src, des, weight
+     */
+    public static int[] u, v,w;
+    static boolean[] vs;
+    public static List<Integer>[] buildListArrayWithEdges(int n, int m, int[][] edges, boolean isDirected)
+    {
+        List<Integer>[] graph = new ArrayList[n];
+        for (int i = 0; i <n; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+        u = new int[m];
+        v = new int[m];
+        w = new int[m];
+        vs = new boolean[m];
+
+        for (int i = 0; i < m; i++) {
+            u[i] = edges[i][0];
+            v[i] = edges[i][1];
+            w[i] = edges[i][2];
+            graph[u[i]].add(i);
+            if(!isDirected){
+                graph[v[i]].add(i);
+            }
+        }
+
+        return graph;
+    }
+
 }

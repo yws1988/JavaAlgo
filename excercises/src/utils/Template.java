@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Template
 {
-    public static int n;
+    public static int n, m;
     public static int[] ns;
     public static String s;
     public static String[] ss;
@@ -21,11 +21,12 @@ public class Template
 
         n = readInt();
         ns = readIntArray();
+        n=ns[0];
+        m=ns[1];
         s = readString();
         ss = readStringArray();
         ss = readLines(n);
 
-        solve();
         scanner.close();
     }
 

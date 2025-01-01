@@ -42,8 +42,8 @@ public class StronglyConnectedComponentList
             if (scc[i]==-1)
             {
                 DFSComponents(i, scc, rGraph, useRootNodeAsComponentId ? i : numCompoents);
+                numCompoents++;
             }
-            numCompoents++;
         }
 
         return scc;
