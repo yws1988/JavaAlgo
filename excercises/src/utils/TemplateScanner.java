@@ -1,21 +1,22 @@
 package utils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
-public class Template
+public class TemplateScanner
 {
     public static int n, m;
     public static int[] ns;
     public static String s;
     public static String[] ss;
 
-    public static void solve() throws IOException {
+    public static void solve() throws FileNotFoundException {
         if(true){
-            FileReader file = new FileReader("D:\\Algo\\JavaAlgo\\excercises\\src\\resources\\test.txt");
-            bufferedReader = new BufferedReader(file);
+            File file = new File("D:\\Algo\\JavaAlgo\\excercises\\src\\resources\\test.txt");
+            scanner = new Scanner(file);
         }else{
-            bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+            scanner = new Scanner(System.in);
         }
 
         n = readInt();
@@ -26,12 +27,12 @@ public class Template
         ss = readStringArray();
         ss = readLines(n);
 
-        bufferedReader.close();
+        scanner.close();
     }
 
 
 
-    public static BufferedReader bufferedReader;
+    public static Scanner scanner;
 
     public static void main( String[] argv ) throws Exception
     {
@@ -46,12 +47,12 @@ public class Template
         }, "1", 1 << 26).start();
     }
 
-    public static int readInt() throws IOException { int tmp = Integer.parseInt(bufferedReader.readLine()); return tmp;}
-    public static int[] readIntArray() throws IOException { return Arrays.stream(readStringArray()).mapToInt(Integer::parseInt).toArray(); }
-    public static String readString() throws IOException { return bufferedReader.readLine(); }
-    public static String[] readStringArray() throws IOException { return bufferedReader.readLine().split("[ \t]"); }
-    public static String[] readLines(int quantity) throws IOException { String[] lines = new String[quantity]; for (int i = 0; i < quantity; i++) lines[i] = bufferedReader.readLine().trim(); return lines; }
-    public static int[][] readIntMatrix(int numberOfRows) throws IOException { int[][] matrix = new int[numberOfRows][]; for (int i = 0; i < numberOfRows; i++) matrix[i] = readIntArray(); return matrix; }
+    public static int readInt() { int tmp = scanner.nextInt(); scanner.nextLine(); return tmp;}
+    public static int[] readIntArray() { return Arrays.stream(readStringArray()).mapToInt(Integer::parseInt).toArray(); }
+    public static String readString() { return scanner.nextLine(); }
+    public static String[] readStringArray() { return scanner.nextLine().split("[ \t]"); }
+    public static String[] readLines(int quantity) { String[] lines = new String[quantity]; for (int i = 0; i < quantity; i++) lines[i] = scanner.nextLine().trim(); return lines; }
+    public static int[][] readIntMatrix(int numberOfRows) { int[][] matrix = new int[numberOfRows][]; for (int i = 0; i < numberOfRows; i++) matrix[i] = readIntArray(); return matrix; }
 
     public static class Pair{
         public int x;
