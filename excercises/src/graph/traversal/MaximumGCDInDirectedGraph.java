@@ -46,27 +46,29 @@ public class MaximumGCDInDirectedGraph {
         n = ns[0];
         m = ns[1];
 
-        w = new int[n + 1];
+        w = new int[n];
 
         ns = readIntArray();
-        List<Integer>[] graph = new ArrayList[n + 1];
-        for (int i = 1; i <= n; i++) {
+        List<Integer>[] graph = new ArrayList[n];
+        for (int i = 0; i < n; i++) {
             graph[i] = new ArrayList<>();
-            w[i]= ns[i-1];
+            w[i]= ns[i];
         }
 
         int[][] tmp = readIntMatrix(m);
-        graph = buildListArray(n+1, tmp, true);
+        graph = buildListArray(n, tmp, true);
 
         int[] scc = getSCC(graph, false);
         gcd = new int[numComponents];
-        for (int i = 1; i <= n; i++) {
-            if(gcd[scc[i]]==0){
-                gcd[scc[i]]=w[i];
+        for (int i = 0; i < n; i++) {
+            int componentId = scc[i];
+            if(gcd[componentId]==0){
+                gcd[componentId]=w[i];
             }else{
-                gcd[scc[i]]=greatestCommonDivisor(w[i], gcd[scc[i]]);
+                gcd[componentId]=greatestCommonDivisor(gcd[componentId], w[i]);
             }
         }
+
 
         List<Integer>[] sccGraph = new ArrayList[numComponents];
         gcds = new Set[numComponents];
@@ -77,8 +79,8 @@ public class MaximumGCDInDirectedGraph {
         }
 
         for (int i = 0; i < m; i++) {
-            int u = scc[tmp[i][0]];
-            int v = scc[tmp[i][1]];
+            int u = scc[tmp[i][0]-1];
+            int v = scc[tmp[i][1]-1];
 
             if(u!=v){
                 sccGraph[u].add(v);
@@ -99,18 +101,15 @@ public class MaximumGCDInDirectedGraph {
 
     static void dfs(List<Integer>[] graph, int src) {
         vs[src] = true;
+        gcds[src].add(gcd[src]);
+        res = Math.min(res, gcd[src]);
         for (var child : graph[src]) {
             if (!vs[child]) {
                 dfs(graph, child);
-                if(gcds[child].size()==0){
-                    gcds[child].add(w[child]);
-                    res = Math.min(res, w[child]);
-                }else{
-                    for (var item : gcds[child]) {
-                        int parentGcd = greatestCommonDivisor(w[src], item);
-                        gcds[src].add(parentGcd);
-                        res = Math.min(parentGcd, res);
-                    }
+                for (var item : gcds[child]) {
+                    int parentGcd = greatestCommonDivisor(gcd[src], item);
+                    gcds[src].add(parentGcd);
+                    res = Math.min(parentGcd, res);
                 }
             }
         }
@@ -131,7 +130,7 @@ public class MaximumGCDInDirectedGraph {
             }
         }
 
-        var rGraph = GraphHelper.getTransposeGraph(graph);
+        var rGraph = getTransposeGraph(graph);
 
         int[] scc = new int[v];
         for (int i = 0; i < v; i++)
@@ -151,6 +150,25 @@ public class MaximumGCDInDirectedGraph {
         }
 
         return scc;
+    }
+
+    public static List<Integer>[] getTransposeGraph(List<Integer>[] graph)
+    {
+        int v = graph.length;
+        ArrayList<Integer>[] reversGraph = new ArrayList[v];
+        for (int i = 0; i < v; i++) {
+            reversGraph[i]=new ArrayList<>();
+        }
+
+        for (int i = 0; i < v; i++)
+        {
+            for (int des : graph[i])
+            {
+                reversGraph[des].add(i);
+            }
+        }
+
+        return reversGraph;
     }
 
     static void DFS(int s, boolean[] vs, Stack<Integer> stack, List<Integer>[] graph)
@@ -203,8 +221,8 @@ public class MaximumGCDInDirectedGraph {
 
         for (var item : arr)
         {
-            int src = item[0];
-            int des = item[1];
+            int src = item[0]-1;
+            int des = item[1]-1;
             graph[src].add(des);
 
             if (!isDirected)
