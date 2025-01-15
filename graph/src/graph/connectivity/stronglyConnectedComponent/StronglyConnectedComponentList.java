@@ -1,4 +1,4 @@
-package graph.connectivity;
+package graph.connectivity.stronglyConnectedComponent;
 
 import utils.graph.GraphHelper;
 
@@ -7,6 +7,8 @@ import java.util.Stack;
 
 public class StronglyConnectedComponentList
 {
+    public static int numCompoents = 0;
+
     /// <summary>
     /// Get strongly Connected Component, return array vetex number and componenet id
     /// </summary>
@@ -35,7 +37,6 @@ public class StronglyConnectedComponentList
             scc[i] = -1;
         }
 
-        int numCompoents = 0;
         while (stack.size() > 0)
         {
             int i = stack.pop();

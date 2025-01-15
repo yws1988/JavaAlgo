@@ -1,4 +1,4 @@
-package graph.connectivity;
+package graph.connectivity.articulationPoint;
 
 import java.util.*;
 

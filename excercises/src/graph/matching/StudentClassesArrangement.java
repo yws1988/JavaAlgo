@@ -3,9 +3,8 @@ package graph.matching;
 import graph.sorting.TopologicalSorting;
 
 import java.util.*;
-import java.util.stream.IntStream;
 
-import static graph.connectivity.StronglyConnectedComponentList.getSCC;
+import static graph.connectivity.stronglyConnectedComponent.StronglyConnectedComponentList.getSCC;
 
 public class StudentClassesArrangement {
 

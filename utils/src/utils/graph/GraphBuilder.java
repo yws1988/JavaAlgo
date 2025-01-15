@@ -18,7 +18,7 @@ public class GraphBuilder
         return graph;
     }
 
-    public static <T> List<T>[] buildListArray(int n, int[][] arr, boolean isDirected)
+    public static <T> List<T>[] buildListArray(int n, int[][] arr, boolean isDirected, int adjust)
     {
         var graph = new ArrayList[n];
 
@@ -28,8 +28,8 @@ public class GraphBuilder
 
         for (var item : arr)
         {
-            int src = item[0];
-            int des = item[1];
+            int src = item[0]+adjust;
+            int des = item[1]+adjust;
             graph[src].add(des);
 
             if (!isDirected)

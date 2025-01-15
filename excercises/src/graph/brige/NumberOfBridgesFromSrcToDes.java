@@ -22,7 +22,7 @@ The output should contain a single number which is the number of bridges present
 The edge (3,5) lies in all paths between node 2 and 5. This is the only edge which occurs in every path between 2 and 5.
  */
 
-import graph.connectivity.Briges;
+import graph.connectivity.bridge.Briges;
 
 import java.util.HashSet;
 import java.util.LinkedList;

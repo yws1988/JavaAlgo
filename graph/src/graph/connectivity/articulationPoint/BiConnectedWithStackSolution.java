@@ -1,4 +1,4 @@
-package graph.connectivity;
+package graph.connectivity.articulationPoint;
 
 /*** Create a new graph with vertex represents BiConnectedComponent, there is a bug ***/
 

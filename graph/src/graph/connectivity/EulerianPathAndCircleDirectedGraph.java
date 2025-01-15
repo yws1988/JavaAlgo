@@ -6,6 +6,8 @@ package graph.connectivity;
     In degree is equal to the out degree for every vertex.
  */
 
+import graph.connectivity.stronglyConnectedComponent.StronglyConnectedGraph;
+
 import java.util.*;
 import java.util.LinkedList;
 

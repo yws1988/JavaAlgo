@@ -24,6 +24,8 @@ then you see that there exists a component of size 5 which is greater than 3 and
 import java.io.*;
 import java.util.*;
 
+import static graph.connectivity.stronglyConnectedComponent.StronglyConnectedComponent.containsSccSizeGreaterThanK;
+
 public class SccAtLeastSizeKWithMinimumWeight {
     public static int n,m,k;
     public static int[] ns, w;
@@ -65,7 +67,7 @@ public class SccAtLeastSizeKWithMinimumWeight {
             int maxWeight = weights.get(mid);
 
             List<Integer>[] graph = buildListArray(tmp, maxWeight);
-            boolean isFind = getSCC(graph);
+            boolean isFind = containsSccSizeGreaterThanK(graph);
 
             if (isFind){
                 idx = mid;
@@ -79,103 +81,6 @@ public class SccAtLeastSizeKWithMinimumWeight {
         System.out.println(weights.get(idx) == 3 ? 2 : weights.get(idx));
 
         scanner.close();
-    }
-
-    public static boolean getSCC(List<Integer>[] graph)
-    {
-        var stack = new Stack<Integer>();
-        int v = graph.length;
-
-        boolean[] visited = new boolean[v];
-
-        for (int i = 0; i < v; i++)
-        {
-            if (!visited[i])
-            {
-                DFS(i, visited, stack, graph);
-            }
-        }
-
-        var rGraph = getTransposeGraph(graph);
-
-        int[] scc = new int[v];
-        int[] counter = new int[v];
-        for (int i = 0; i < v; i++)
-        {
-            scc[i] = -1;
-        }
-
-        int numCompoents = 0;
-
-        while (stack.size() > 0)
-        {
-            int i = stack.pop();
-            if (scc[i]==-1)
-            {
-                if(DFSComponents(i, scc, rGraph, numCompoents, counter)){
-                    return true;
-                }
-                numCompoents++;
-            }
-        }
-
-        return false;
-    }
-
-    public static List<Integer>[] getTransposeGraph(List<Integer>[] graph)
-    {
-        int v = graph.length;
-        ArrayList<Integer>[] reversGraph = new ArrayList[v];
-        for (int i = 0; i < v; i++) {
-            reversGraph[i]=new ArrayList<>();
-        }
-
-        for (int i = 0; i < v; i++)
-        {
-            for (int des : graph[i])
-            {
-                reversGraph[des].add(i);
-            }
-        }
-
-        return reversGraph;
-    }
-
-
-    static void DFS(int s, boolean[] vs, Stack<Integer> stack, List<Integer>[] graph)
-    {
-        vs[s] = true;
-
-        for (int c : graph[s])
-        {
-            if (!vs[c])
-            {
-                DFS(c, vs, stack, graph);
-            }
-        }
-
-        stack.push(s);
-    }
-
-    static boolean DFSComponents(int s, int[] scc, List<Integer>[] graph, int num, int[] counter)
-    {
-        counter[num]++;
-        if(counter[num]>=k){
-            return true;
-        }
-
-        scc[s] = num;
-        for (int c : graph[s])
-        {
-            if (scc[c]==-1)
-            {
-                if(DFSComponents(c, scc, graph, num, counter)){
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 
     public static List<Integer>[] buildListArray(int[][] arr, int maxWeight)

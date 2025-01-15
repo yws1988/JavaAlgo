@@ -38,7 +38,7 @@ No
  */
 
 import datastructures.graph.EdgeWithWeight;
-import graph.connectivity.BiConnected;
+import graph.connectivity.articulationPoint.BiConnected;
 import graph.connectivity.ConnectedGraphBuilder;
 import graph.tree.binarytree.LowestCommonAncestorWithDpSolution;
 import utils.graph.GraphBuilder;
@@ -47,8 +47,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.*;
 
-import static graph.connectivity.BiConnected.articulationPointComponentId;
-import static graph.connectivity.BiConnected.biConnectedComponents;
+import static graph.connectivity.articulationPoint.BiConnected.articulationPointComponentId;
+import static graph.connectivity.articulationPoint.BiConnected.biConnectedComponents;
 import static graph.connectivity.ConnectedGraphBuilder.connectedComponents;
 import static graph.tree.binarytree.LowestCommonAncestorWithDpSolution.lca;
 

@@ -13,14 +13,14 @@ The following m lines contains u, v, w separated space describing graph's edge's
  5 1 1
  */
 
-import graph.connectivity.BiConnected;
+import graph.connectivity.articulationPoint.BiConnected;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 import utils.graph.GraphBuilder;
 
-import static graph.connectivity.BiConnected.biConnectedComponentsList;
+import static graph.connectivity.articulationPoint.BiConnected.biConnectedComponentsList;
 import static utils.graph.GraphBuilder.buildListArray;
 
 public class SpanningTreeWithOddWeightSum
@@ -41,7 +41,7 @@ public class SpanningTreeWithOddWeightSum
 
         int[][] tmp = readIntMatrix(m);
         HashMap<List, Integer> edgesWithWeight = GraphBuilder.buildSetEdgesWithWeight(tmp, false);
-        List<Integer>[] graph = buildListArray(n+1, tmp, false);
+        List<Integer>[] graph = buildListArray(n+1, tmp, false, 0);
         BiConnected.getBiConnectedComponents(graph);
 
         int componentSize = biConnectedComponentsList.size();

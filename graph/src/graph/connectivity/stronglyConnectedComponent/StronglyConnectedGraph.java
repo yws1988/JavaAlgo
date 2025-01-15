@@ -1,4 +1,4 @@
-package graph.connectivity;
+package graph.connectivity.stronglyConnectedComponent;
 
 import utils.graph.GraphHelper;
 
