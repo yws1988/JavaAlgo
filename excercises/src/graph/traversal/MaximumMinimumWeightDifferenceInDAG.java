@@ -2,37 +2,33 @@ package graph.traversal;
 
 /*
  Given a directed graph with weight, get the maximum value of path which equals
- to (Maximum Weight Edge - Minimum Weight Edge) in the path
+ to (Maximum Weight of Vertex - Minimum Weight of Vertex) in the path, minimum weight vertex
+ should at the beginning of the path
 
  First line contains two integers n, m number of graph's vertices and number of graph's edges.
- The following m lines contains u, v, w separated space describing graph's edge's vertices with weight
+ next line contains n integers of vertex weights
+ The following m lines contains u, v separated space represents edge of the graph
 
- 6 8
- 1 2 9
- 2 3 7
- 3 1 1
- 2 4 5
- 3 4 4
- 4 5 6
- 5 6 3
- 6 4 10
+ 2 1
+ 3 9
+ 1 2
+ 3 2
 
- One of the optimal paths is: 2->3->1->2->4->5->6->4
- Which gives value equal to 10-1=9
+ Output should be 9-3=6
  */
 
+
+import utils.graph.GraphBuilder;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class MaximumMinimumEdgeWeightDifferenceInDirectedGraph {
+public class MaximumMinimumWeightDifferenceInDAG {
     public static Scanner scanner;
 
-    public static int n, m;
-    static int[] u, v, w;
-    static boolean[] vs;
-
+    public static int n, m, t;
+    static int[] ws;
     static int maxWeight, minWeight;
 
     public static void solve() throws FileNotFoundException {
@@ -46,60 +42,28 @@ public class MaximumMinimumEdgeWeightDifferenceInDirectedGraph {
         int[] ns = readIntArray();
         n = ns[0];
         m = ns[1];
+        ws = readIntArray();
 
-        List<Integer>[] graph = new ArrayList[n + 1];
-        for (int i = 0; i <= n; i++) {
-            graph[i] = new ArrayList<>();
-        }
+        var tmp = readIntMatrix(m);
 
-        u = new int[m + 1];
-        v = new int[m + 1];
-        w = new int[m + 1];
-        vs = new boolean[m + 1];
-
+        List<Integer>[] graph = GraphBuilder.buildListArray(n, tmp, true, -1);
         List<Pair> vertexWithWeights = new ArrayList<>();
-        int[][] tmp = readIntMatrix(m);
-        for (int i = 0; i < m; i++) {
-            u[i] = tmp[i][0];
-            v[i] = tmp[i][1];
-            w[i] = tmp[i][2];
-            vertexWithWeights.add(new Pair(i, w[i]));
-            graph[u[i]].add(i);
+        for (int j = 0; j < n; j++) {
+            vertexWithWeights.add(new Pair(j, ws[j]));
         }
 
         Collections.sort(vertexWithWeights);
 
         int diff = 0;
-        for (int i = 0; i < m; i++) {
-            var edgeWithWeight = vertexWithWeights.get(i);
-            int edge = edgeWithWeight.idx;
+        boolean[] vs = new boolean[n];
+        for (int j = 0; j < n; j++) {
+            var vertexWithWeight = vertexWithWeights.get(j);
+            int src = vertexWithWeight.idx;
 
-            if (!vs[edge]) {
-                vs[edge]=true;
-                int des = v[edge];
-                minWeight = edgeWithWeight.weight;
+            if (!vs[src]) {
+                minWeight = vertexWithWeight.weight;
                 maxWeight = minWeight;
-                vs[edge]=true;
-                dfs(graph, des, "asc");
-                diff = Math.max(diff, maxWeight - minWeight);
-            }
-        }
-
-
-        Collections.reverse(vertexWithWeights);
-        Arrays.fill(vs, false);
-
-        for (int i = 0; i < m; i++) {
-            var edgeWithWeight = vertexWithWeights.get(i);
-            int edge = edgeWithWeight.idx;
-
-            if (!vs[edge]) {
-                vs[edge]=true;
-                int des = v[edge];
-                maxWeight = edgeWithWeight.weight;
-                minWeight = maxWeight;
-                vs[edge]=true;
-                dfs(graph, des, "desc");
+                dfs(graph, src, vs);
                 diff = Math.max(diff, maxWeight - minWeight);
             }
         }
@@ -108,21 +72,15 @@ public class MaximumMinimumEdgeWeightDifferenceInDirectedGraph {
         scanner.close();
     }
 
-    static void dfs(List<Integer>[] graph, int src, String order) {
+    static void dfs(List<Integer>[] graph, int src, boolean[] vs) {
+        vs[src]=true;
         for (var child : graph[src]) {
             if (!vs[child]) {
-                vs[child]=true;
-                if (order.equals("asc")) {
-                    maxWeight = Math.max(maxWeight, w[child]);
-                } else {
-                    minWeight = Math.min(minWeight, w[child]);
-                }
-
-                dfs(graph, v[child], order);
+                maxWeight = Math.max(maxWeight, ws[child]);
+                dfs(graph, child, vs);
             }
         }
     }
-
 
     public static void mainF(String[] argv) throws Exception {
         new Thread(null, new Runnable() {
@@ -150,6 +108,8 @@ public class MaximumMinimumEdgeWeightDifferenceInDirectedGraph {
             return this.weight - o.weight;
         }
     }
+
+    public static int readInt() { int tmp = scanner.nextInt(); scanner.nextLine(); return tmp;}
 
     public static int[] readIntArray() {
         return Arrays.stream(readStringArray()).mapToInt(Integer::parseInt).toArray();
