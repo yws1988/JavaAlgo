@@ -36,32 +36,43 @@ public class MaximumLengthSimplePath
             for (int k  = 0; k < n; k++)
             {
                 var vs = new boolean[n];
-
+                sumOfVertices = 0;
+                maxLevel=0;
                 dfsPathUntil(graph, n, vs, k, 1, 0);
                 minSumVertices = Math.min(sumOfVertices, minSumVertices);
                 maxSumVertices = Math.max(sumOfVertices, maxSumVertices);
             }
 
+            int gcd = greatestCommonDivisor(minSumVertices, maxSumVertices);
+            System.out.println(maxSumVertices/gcd+" "+minSumVertices/gcd);
 
         }
-
-        s = readString();
-        ss = readStringArray();
-        ss = readLines(n);
 
         bufferedReader.close();
     }
 
-    static int maxLevel, sumOfVertices = 0;
+    public static int greatestCommonDivisor(int m, int n)
+    {
+        while (n > 0)
+        {
+            int t = n;
+            n = m % n;
+            m = t;
+        }
+
+        return m;
+    }
+
+
+    static int maxLevel=0, sumOfVertices = 0;
 
     static void dfsPathUntil(List<Integer>[] graph, int n, boolean[] vs, int src, int level, int sum)
     {
         vs[src] = true;
+        sum+=src+1;
 
         if(maxLevel <=level){
             maxLevel = level;
-
-            sum+=src+1;
             sumOfVertices = Math.max(sum, sumOfVertices);
         }
 
