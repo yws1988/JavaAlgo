@@ -12,7 +12,7 @@ import java.util.LinkedList;
 
 public class FordFulkersonMaximumFlow
 {
-    public static int getMaximunFlow(int[][] rGraph, int s, int d)
+    public static int getMaximumFlow(int[][] rGraph, int src, int des)
     {
         //rGraph is residual graph
 
@@ -20,27 +20,23 @@ public class FordFulkersonMaximumFlow
 
         int maxFlow = 0;
         int[] parent = new int[v];
-        while (isReachableByBFS(rGraph, s, d, parent))
+        while (isReachableByBFS(rGraph, src, des, parent))
         {
-            int p = parent[d];
-            int c = d;
+            int p = parent[des];
+            int c = des;
             int minFlow = rGraph[p][c];
-            while (p != s)
+            while (p != src)
             {
                 c = p;
                 p = parent[c];
                 minFlow = Math.min(minFlow, rGraph[p][c]);
             }
 
-            p = parent[d];
-            c = d;
-            do
-            {
+            for (c = des; c != src; c = parent[c]) {
+                p = parent[c];
                 rGraph[p][c] -= minFlow;
                 rGraph[c][p] += minFlow;
-                c = p;
-                p = parent[c];
-            } while (p != s);
+            }
 
             maxFlow += minFlow;
         }
@@ -48,13 +44,13 @@ public class FordFulkersonMaximumFlow
         return maxFlow;
     }
 
-    static boolean isReachableByBFS(int[][] graph, int s, int d, int[] parent)
+    static boolean isReachableByBFS(int[][] graph, int src, int des, int[] parent)
     {
         int v = graph.length;
         LinkedList<Integer> queue = new LinkedList<>();
-        queue.add(s);
+        queue.add(src);
         boolean[] visited = new boolean[v];
-        visited[s] = true;
+        visited[src] = true;
 
         while (queue.size() > 0)
         {
@@ -66,7 +62,7 @@ public class FordFulkersonMaximumFlow
                     queue.add(i);
                     visited[i] = true;
                     parent[i] = p;
-                    if (i == d)
+                    if (i == des)
                     {
                         return true;
                     }

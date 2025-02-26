@@ -21,7 +21,7 @@ public class ConnectedAreasPathCostForMultipleSourcesInGrid
 
         int numOfVetexes = costs.length;
 
-        return FordFulkersonMaximumFlow.getMaximunFlow(costs, 0, numOfVetexes - 1);
+        return FordFulkersonMaximumFlow.getMaximumFlow(costs, 0, numOfVetexes - 1);
     }
 
     public static int[][] buildConnectedAreasCostMatrix(String[] graph, char symbolSource, char symbolDestination, char symbolCost, char symbolWall)
