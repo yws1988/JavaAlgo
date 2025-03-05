@@ -18,10 +18,10 @@ import graph.connectivity.articulationPoint.BiConnected;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
-import utils.graph.GraphBuilder;
+import utils.graph.GraphLIstBuilder;
 
 import static graph.connectivity.articulationPoint.BiConnected.biConnectedComponentsList;
-import static utils.graph.GraphBuilder.buildListArray;
+import static utils.graph.GraphLIstBuilder.buildListArray;
 
 public class SpanningTreeWithOddWeightSum
 {
@@ -40,7 +40,7 @@ public class SpanningTreeWithOddWeightSum
         m=ns[1];
 
         int[][] tmp = readIntMatrix(m);
-        HashMap<List, Integer> edgesWithWeight = GraphBuilder.buildSetEdgesWithWeight(tmp, false);
+        HashMap<List, Integer> edgesWithWeight = GraphLIstBuilder.buildSetEdgesWithWeight(tmp, false);
         List<Integer>[] graph = buildListArray(n+1, tmp, false, 0);
         BiConnected.getBiConnectedComponents(graph);
 

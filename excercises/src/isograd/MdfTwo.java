@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
-public class MdfTwo
+public class IsoContest
 {
-    public static int n, m;
+    public static int n, m,e;
     public static int[] ns;
     public static String s;
     public static String[] ss;
@@ -20,12 +20,15 @@ public class MdfTwo
         }
 
         n = readInt();
+        m = readInt();
         ns = readIntArray();
         n=ns[0];
         m=ns[1];
-        s = readString();
-        ss = readStringArray();
-        ss = readLines(n);
+        e=ns[2];
+
+        int sum = Arrays.stream(ns).sum();
+
+
 
         scanner.close();
     }

@@ -18,7 +18,7 @@ package graph.traversal;
  */
 
 
-import utils.graph.GraphBuilder;
+import utils.graph.GraphLIstBuilder;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -46,7 +46,7 @@ public class MaximumMinimumWeightDifferenceInDAG {
 
         var tmp = readIntMatrix(m);
 
-        List<Integer>[] graph = GraphBuilder.buildListArray(n, tmp, true, -1);
+        List<Integer>[] graph = GraphLIstBuilder.buildListArray(n, tmp, true, -1);
         List<Pair> vertexWithWeights = new ArrayList<>();
         for (int j = 0; j < n; j++) {
             vertexWithWeights.add(new Pair(j, ws[j]));

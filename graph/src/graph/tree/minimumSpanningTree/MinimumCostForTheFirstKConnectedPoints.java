@@ -7,7 +7,7 @@ package graph.tree.minimumSpanningTree;
 
 import datastructures.tuple.Triple;
 import graph.path.shortestpath.WarshallShortestPath;
-import utils.graph.GraphBuilder;
+import utils.graph.GraphLIstBuilder;
 
 public class MinimumCostForTheFirstKConnectedPoints {
     public static int getMinimumCost(int[][] graph, int k)
@@ -15,7 +15,7 @@ public class MinimumCostForTheFirstKConnectedPoints {
         int[][] path = new int[graph.length][];
         var costs = WarshallShortestPath.getShortestCostsAndPath(graph, path);
 
-        var newGraph = GraphBuilder.<Triple>buildListArray(k);
+        var newGraph = GraphLIstBuilder.<Triple>buildListArray(k);
 
         for (int a = 0; a < k; a++)
         {

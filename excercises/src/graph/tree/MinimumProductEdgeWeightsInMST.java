@@ -14,7 +14,7 @@ Output: 180
 import datastructures.tuple.Triple;
 import datastructures.tuple.TripleDouble;
 import graph.tree.minimumSpanningTree.MinimumSpanningTree;
-import utils.graph.GraphBuilder;
+import utils.graph.GraphLIstBuilder;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class MinimumProductEdgeWeightsInMST {
     public static long getMinimumProductOfEdgeWeights(List<Triple>[] graph){
         int n = graph.length;
 
-        var graphWithDoubleWeight = GraphBuilder.<TripleDouble>buildListArray(n);
+        var graphWithDoubleWeight = GraphLIstBuilder.<TripleDouble>buildListArray(n);
 
         for (int i = 0; i < n; i++) {
             for (Triple triple : graph[i]){

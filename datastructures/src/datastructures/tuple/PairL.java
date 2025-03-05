@@ -15,7 +15,7 @@ public class PairL {
         return new PairL(x, y);
     }
 
-    public class PairComparator implements Comparator<PairL> {
+    public static class PairComparator implements Comparator<PairL> {
 
         @Override
         public int compare(PairL o1, PairL o2) {

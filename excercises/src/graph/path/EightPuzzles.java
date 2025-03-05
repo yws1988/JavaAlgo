@@ -34,7 +34,7 @@ package graph.path;
  */
 
 import utils.ArrayHelper;
-import utils.MatrixHelper;
+import utils.graph.MatrixHelper;
 
 import java.util.*;
 

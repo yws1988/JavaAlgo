@@ -41,7 +41,7 @@ import datastructures.graph.EdgeWithWeight;
 import graph.connectivity.articulationPoint.BiConnected;
 import graph.connectivity.ConnectedGraphBuilder;
 import graph.tree.binarytree.LowestCommonAncestorWithDpSolution;
-import utils.graph.GraphBuilder;
+import utils.graph.GraphLIstBuilder;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -73,7 +73,7 @@ public class PathNotGoAcrossThroughAnotherPath
         q=ns[2];
 
         int[][] tmp = readIntMatrix(m);
-        List<EdgeWithWeight>[] graph = GraphBuilder.buildListArrayWithWeight(n, tmp, false);
+        List<EdgeWithWeight>[] graph = GraphLIstBuilder.buildListArrayWithWeight(n, tmp, false);
 
         HashSet<Integer>[] componentGraph = ConnectedGraphBuilder.transformToConnectedComponentGraph(graph);
         HashSet<Integer>[] biComponentGraph = BiConnected.buildBiConnectedComponentGraph(componentGraph);

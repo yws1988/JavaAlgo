@@ -19,13 +19,22 @@ public class MdfOne
             scanner = new Scanner(System.in);
         }
 
-        n = readInt();
-        ns = readIntArray();
-        n=ns[0];
-        m=ns[1];
         s = readString();
-        ss = readStringArray();
-        ss = readLines(n);
+
+        Map<Character, Character> map = Map.of('F', 'C', 'C', 'P', 'P', 'F');
+
+        Character res = null;
+        for (int i = 1; i < s.length(); i++) {
+            res = s.charAt(i);
+            Character b = s.charAt(i+1);
+
+           if(map.get(res).equals(b)){
+                res=b;
+            }
+        }
+
+        System.out.println(res);
+
 
         scanner.close();
     }

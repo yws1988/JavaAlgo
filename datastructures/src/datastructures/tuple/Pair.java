@@ -14,7 +14,7 @@ public class Pair{
         return new Pair(x, y);
     }
 
-    public class PairComparator implements Comparator<Pair> {
+    public static class PairComparator implements Comparator<Pair> {
 
         @Override
         public int compare(Pair o1, Pair o2) {

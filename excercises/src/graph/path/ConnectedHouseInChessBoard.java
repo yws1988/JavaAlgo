@@ -1,6 +1,6 @@
 package graph.path;
 
-import utils.graph.GraphBuilder;
+import utils.graph.GraphLIstBuilder;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -27,7 +27,7 @@ public class ConnectedHouseInChessBoard {
 
     public long getNumberOfHorsePermutation(HashSet<Integer> horses)
     {
-        graph = GraphBuilder.buildListArray(n*m);
+        graph = GraphLIstBuilder.buildListArray(n*m);
 
         for (var p : horses)
         {

@@ -54,6 +54,24 @@ public class ConnectedGraphBuilder
         }
     }
 
+    static int[] dx = {0, 1, 0, -1};
+    static int[] dy = {1, 0, -1, 0};
+
+    static void DFSUtilFourNeighbours(int[][] graph, int i, int j, boolean[][] vs, int v)
+    {
+        vs[i][j] = true;
+
+        for (int k = 0; k < 4; k++) {
+            int tI = i + dx[k];
+            int tJ = j + dy[k];
+            if(isSafe(tI, tJ, v) && !vs[tI][tJ] && graph[tI][tJ]==1)
+            {
+                DFSUtilFourNeighbours(graph, tI, tJ, vs, v);
+            }
+        }
+    }
+
+
     static boolean isSafe(int i, int j, int v)
     {
         return i >= 0 && i < v && j >= 0 && j < v;

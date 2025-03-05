@@ -5,7 +5,7 @@ import datastructures.graph.EdgeWithWeight;
 import java.util.*;
 import java.util.stream.IntStream;
 
-public class GraphBuilder
+public class GraphLIstBuilder
 {
     public static <T> List<T>[] buildListArray(int n)
     {

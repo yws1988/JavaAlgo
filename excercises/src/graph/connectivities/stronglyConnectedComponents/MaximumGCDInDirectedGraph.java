@@ -20,7 +20,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 import static graph.connectivity.stronglyConnectedComponent.StronglyConnectedComponentList.getSCC;
-import static utils.graph.GraphBuilder.buildListArray;
+import static utils.graph.GraphLIstBuilder.buildListArray;
 
 public class MaximumGCDInDirectedGraph {
     public static BufferedReader bufferedReader;
