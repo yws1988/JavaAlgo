@@ -1,9 +1,12 @@
-package utils;
+package isograd;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
-public class Template
+public class IsoContest
 {
     public static int n, m;
     public static int[] ns;
@@ -28,8 +31,6 @@ public class Template
 
         bufferedReader.close();
     }
-
-
 
     public static BufferedReader bufferedReader;
 
@@ -87,25 +88,6 @@ public class Template
         @Override
         public int compare(Pair o1, Pair o2) {
             return o1.x-o2.x;
-        }
-    }
-
-    public static void printEdgeList(HashSet<Integer>[] biComponentGraph){
-        HashSet<List> edges = new HashSet<>();
-        List<Integer> edge;
-        for (int i = 0; i < biComponentGraph.length; i++) {
-            for (int j : biComponentGraph[i]) {
-                if(i>j){
-                    edge = List.of(j, i);
-                }else{
-                    edge = List.of(i, j);
-                }
-
-                if(!edges.contains(edge)){
-                    edges.add(edge);
-                    System.out.println(edge.get(0)+"-"+edge.get(1));
-                }
-            }
         }
     }
 }

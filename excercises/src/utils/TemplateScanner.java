@@ -54,7 +54,7 @@ public class TemplateScanner
     public static String[] readLines(int quantity) { String[] lines = new String[quantity]; for (int i = 0; i < quantity; i++) lines[i] = scanner.nextLine().trim(); return lines; }
     public static int[][] readIntMatrix(int numberOfRows) { int[][] matrix = new int[numberOfRows][]; for (int i = 0; i < numberOfRows; i++) matrix[i] = readIntArray(); return matrix; }
 
-    public static class Pair{
+    public static class Pair {
         public int x;
         public int y;
 
@@ -63,10 +63,23 @@ public class TemplateScanner
             this.y = y;
         }
 
-        public Pair clone(){
-            return new Pair(x, y);
+        @Override
+        public boolean equals(Object obj) {
+            Template.Pair other = (Template.Pair) obj;
+            return this.x == other.x && this.y == other.y;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(x, y);
+        }
+
+        @Override
+        public Template.Pair clone() {
+            return new Template.Pair(x, y);
         }
     }
+
 
     public static class PairComparator implements Comparator<Pair> {
         @Override

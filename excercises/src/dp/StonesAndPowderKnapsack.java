@@ -1,4 +1,4 @@
-package dp.excercises;
+package dp;
 
 import dp.others.MaximumValueToReachAtMostWeight;
 
