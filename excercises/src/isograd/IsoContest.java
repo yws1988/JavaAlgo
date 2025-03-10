@@ -14,7 +14,7 @@ public class IsoContest
     public static String[] ss;
 
     public static void solve() throws IOException {
-        if(true){
+        if(false){
             FileReader file = new FileReader("D:\\Algo\\JavaAlgo\\excercises\\src\\resources\\test.txt");
             bufferedReader = new BufferedReader(file);
         }else{
@@ -56,6 +56,9 @@ public class IsoContest
     public static String[][] readStringMatrix(int numberOfRows) throws IOException { String[][] matrix = new String[numberOfRows][]; for (int i = 0; i < numberOfRows; i++) matrix[i] = readStringArray(); return matrix; }
     public static char[] readChars() throws IOException { return bufferedReader.readLine().toCharArray(); }
     public static char[][] readCharsMatrix(int numberOfRows) throws IOException { char[][] matrix = new char[numberOfRows][]; for (int i = 0; i < numberOfRows; i++) matrix[i] = readChars(); return matrix; }
+    public static double readDouble() throws IOException { return Double.parseDouble(bufferedReader.readLine()); }
+    public static double[] readDoubleArray() throws IOException { return Arrays.stream(readStringArray()).mapToDouble(Double::parseDouble).toArray(); }
+    public static double[][] readDoubleMatrix(int numberOfRows) throws IOException { double[][] matrix = new double[numberOfRows][]; for (int i = 0; i < numberOfRows; i++) matrix[i] = readDoubleArray(); return matrix; }
 
     public static class Pair {
         public int x;
