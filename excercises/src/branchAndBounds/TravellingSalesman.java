@@ -177,7 +177,7 @@ public class TravellingSalesman
     }
 
     // Driver code
-    public static void main(String[] args)
+    public static void mainF(String[] args)
     {
 
     }

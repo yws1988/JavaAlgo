@@ -3,6 +3,7 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$/geometry">
       <sourceFolder url="file://$MODULE_DIR$/geometry/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/geometry/src/test" isTestSource="true" />
     </content>
   </component>
 </module>

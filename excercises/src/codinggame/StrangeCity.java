@@ -86,7 +86,7 @@ public class StrangeCity {
 
     public static Scanner scanner;
 
-    public static void main(String[] argv) throws Exception {
+    public static void mainF(String[] argv) throws Exception {
         scanner = new Scanner(System.in);
 
         if(true){

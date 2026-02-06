@@ -33,7 +33,7 @@ public class Template
 
     public static BufferedReader bufferedReader;
 
-    public static void main( String[] argv ) throws Exception
+    public static void mainF( String[] argv ) throws Exception
     {
         new Thread(null, new Runnable() {
             public void run() {
