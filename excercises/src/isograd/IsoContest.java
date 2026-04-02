@@ -13,6 +13,21 @@ public class IsoContest
     public static String s;
     public static String[] ss;
 
+    public static class Node implements Comparable<Node>{
+        Character c;
+        List<Integer> ranks;
+
+        public Node(Character c, List<Integer> rank) {
+            this.c = c;
+            this.ranks = rank;
+        }
+
+        @Override
+        public int compareTo(Node o) {
+            return 0;
+        }
+    }
+
     public static void solve() throws IOException {
         if(false){
             FileReader file = new FileReader("D:\\Algo\\JavaAlgo\\excercises\\src\\resources\\test.txt");
@@ -21,20 +36,14 @@ public class IsoContest
             bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         }
 
-        n = readInt();
-        ns = readIntArray();
-        n=ns[0];
-        m=ns[1];
-        s = readString();
-        ss = readStringArray();
-        ss = readLines(n);
+
 
         bufferedReader.close();
     }
 
     public static BufferedReader bufferedReader;
 
-    public static void mainF( String[] argv ) throws Exception
+    public static void main(String[] argv ) throws Exception
     {
         new Thread(null, new Runnable() {
             public void run() {
@@ -45,6 +54,8 @@ public class IsoContest
                 }
             }
         }, "1", 1 << 26).start();
+
+        System.out.println("ddd");
     }
 
     public static int readInt() throws IOException { int tmp = Integer.parseInt(bufferedReader.readLine()); return tmp;}
