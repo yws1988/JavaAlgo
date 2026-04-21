@@ -9,9 +9,9 @@
       <module fileurl="file://$PROJECT_DIR$/geometry.iml" filepath="$PROJECT_DIR$/geometry.iml" />
       <module fileurl="file://$PROJECT_DIR$/graph.iml" filepath="$PROJECT_DIR$/graph.iml" />
       <module fileurl="file://$PROJECT_DIR$/math.iml" filepath="$PROJECT_DIR$/math.iml" />
-      <module fileurl="file://$PROJECT_DIR$/multithreading.iml" filepath="$PROJECT_DIR$/multithreading.iml" />
       <module fileurl="file://$PROJECT_DIR$/search/search.iml" filepath="$PROJECT_DIR$/search/search.iml" />
       <module fileurl="file://$PROJECT_DIR$/sorting.iml" filepath="$PROJECT_DIR$/sorting.iml" />
+      <module fileurl="file://$PROJECT_DIR$/systemdesign/systemdesign.iml" filepath="$PROJECT_DIR$/systemdesign/systemdesign.iml" />
       <module fileurl="file://$PROJECT_DIR$/utils.iml" filepath="$PROJECT_DIR$/utils.iml" />
     </modules>
   </component>

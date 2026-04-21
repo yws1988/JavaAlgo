@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="systemdesign" />
         <module name="search" />
         <module name="bitmasking" />
         <module name="utils" />
@@ -13,7 +14,6 @@
         <module name="sorting" />
         <module name="excercises" />
         <module name="geometry" />
-        <module name="multithreading" />
         <module name="math" />
         <module name="datastructures" />
         <module name="graph" />

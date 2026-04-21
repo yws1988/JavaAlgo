@@ -19,7 +19,7 @@
         <module>sorting</module>
         <module>math</module>
         <module>utils</module>
-        <module>multithreading</module>
+        <module>systemdesign</module>
     </modules>
 
     <properties>
