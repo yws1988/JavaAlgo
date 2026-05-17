@@ -1,3 +1,5 @@
+package multithreading;
+
 import java.util.LinkedList;
 
 public class ProducerConsumer {

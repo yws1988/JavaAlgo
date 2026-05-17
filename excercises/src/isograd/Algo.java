@@ -1,6 +1,8 @@
 package isograd;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static java.lang.Math.round;
 
@@ -16,8 +18,40 @@ public class Algo {
 
         return queue.size();
     }
+
     public static void solve(){
 
+
+    }
+
+    public static int computeLongestIncreasingSubsequenceLength(int n, List<Integer> quality) {
+        // Write your code here
+        int length = quality.size();
+        if(length<=1) return length;
+
+        int[] tails = new int[length];
+        for (int i = 0; i < tails.length; i++) {
+            tails[i]=Integer.MIN_VALUE;
+        }
+        int result = 0;
+        for (int value : quality) {
+            int left = 0, right=length-1;
+            while(left<=right){
+                int mid=(left+right)>>1;
+                if(tails[mid]<value){
+                    left=mid+1;
+                }else{
+                    right=mid-1;
+                }
+            }
+
+            if(left==length) return length;
+            tails[left-1<0 ? 0 : left-1]=value;
+
+            result=Math.max(result, left);
+        }
+
+        return result;
     }
 
     public static List<List<Integer>> mergeHighDefinitionIntervals(List<List<Integer>> intervals) {
@@ -28,38 +62,19 @@ public class Algo {
         return null;
     }
 
-    public static String maxWindowAvg(List<Point> points, int k){
-        int max=Integer.MIN_VALUE;
-        int sum=0;
-        List<Integer> sums=new ArrayList<>();
-        for (int i = 0; i < k; i++) {
-            sum+=points.get(i).b;
-        }
-        sums.add(sum);
-        max=Math.max(sum, max);
-        for (int i = k; i < points.size(); i++) {
-            sum-=points.get(i-k).b;
-            sum+=points.get(i).b;
-            sums.add(sum);
-            max=Math.max(sum, max);
-        }
-        int[] too={5, 6};
-        return Arrays.toString(too);
-//        return Double.toString(Math.round((double)max/k*100)/100.0);
-    }
-
     record Point(Integer a, Integer b){}
 
     public static void main(String[] args){
-        List<Point> list = Arrays.asList(
-                new Point(10, 20),
-                new Point(5, 30),
-                new Point(5, 10),
-                new Point(1, 100),
-                new Point(50, 2000)
+        List<Integer> list = List.of(
+                5,
+                5,
+                1,
+                2,
+                3,
+                4,
+                5
         );
-        list.stream().sorted((p1, p2) ->
-                p1.a.compareTo(p2.a)!=0 ? p1.a.compareTo(p2.a) : p1.b.compareTo(p2.b))
-            .forEach(System.out::println);
+        int result = computeLongestIncreasingSubsequenceLength(7, list);
+        System.out.println(result);
     }
 }
